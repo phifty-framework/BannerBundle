@@ -1,0 +1,14 @@
+{# vim:filetype=htmldjango:
+#}
+{% extends '@CRUD/index.html' %}
+{% block crud_control_section %}
+    {{ parent() }}
+    {% if CRUD.Object.canCreate %}
+        {# append a region after the div.section, if user clicks "Create" #}
+        <input type="button" 
+            class="button record-create-btn"
+            value="建立新的{{ new('BannerSlider\\Model\\Image').getLabel() }}" 
+            onclick=" Region.after( $(this).parents('.section').get(0), 
+                '/bs/banner_image/crud/create' ); return false;"/>
+    {% endif %}
+{% endblock %}

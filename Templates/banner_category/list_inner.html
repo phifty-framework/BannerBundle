@@ -1,0 +1,117 @@
+{% extends "@CRUD/list_inner.html" %}
+{% block list %}
+<style>
+    .ui-placeholder { 
+        height: 100px; 
+        width: 100px; 
+        float: left; 
+        margin:10px; 
+        background: #ddd;
+        border: 1px solid #bbb;
+    }
+    .banner-category { 
+        margin-bottom: 10px;
+        border-top: 1px solid #ccc;
+    }
+    .banner-category .category-name {
+        color: #666;
+        font-weight: bold;
+        text-shadow: 0px 0px 2px #ccc;
+        padding: 5px 8px;
+        border-radius: 5px;
+    }
+    .banner-category .control { float: right; }
+    .banner-category .no-data {
+        margin-left: 20px;
+        color: #aaa;
+        font-weight: bold;
+    }
+</style>
+
+<div class="clear"> </div>
+{% if not CRUD.Items %}
+    <div class="notice">目前無資料</div>
+{% endif %}
+
+{% for category in CRUD.Items %}
+
+<div class="banner-category">
+    <div class="category-name">
+        {{ category.name }} ({{ category.place_holder }})
+
+        <span class="control">
+            <input 
+                type="button"
+                class="button category-edit" 
+                onclick=" Region.before( $(this).parents('.section').get(0) , '/bs/banner_category/crud/edit',{ id: {{ category.id }} });"
+                value="{% trans 'Edit' %}"/>
+            <input type="button" 
+                class="button category-delete" 
+                onclick=" runAction( 'BannerSlider::Action::DeleteCategory',
+                    { id: {{ category.id }}  },
+                    { confirm: '確認刪除? ', remove: $(this).parents('.banner-category') } );" 
+                value="{% trans 'Delete' %}"/>
+        </span>
+    </div>
+    <div id="banner-category-images-{{ category.id }}" 
+        class="banner-category-images sortable"
+        data-items=".image-cover"
+        data-action="BannerSlider::Action::SortImage"
+        data-fields=".image-cover input[type=hidden]"
+        >
+
+        {% set images = category.getImages() %}
+
+        {% if not images.size() %}
+            <div class="no-data">{% trans 'Currently no images in this category' %}</div>
+        {% endif %}
+        {% for item in images %}
+            {% include '@BannerSlider/banner_image/image.html' %}
+        {% endfor %}
+        <div class="clear"> </div>
+    </div>
+    <div class="clear"> </div>
+
+    <!-- drag-drop box -->
+    <div id="dropbox-container-{{ category.id }}" 
+        class="dropbox-container">
+    </div>
+    <script type="text/javascript">
+    $(function() {
+        var $container = $('#dropbox-container-{{ category.id }}');
+        var $detector = $('#banner-category-images-{{ category.id }}');
+        var conn = new FiveKit.DropBoxActConnection({
+            container: $container,
+            detector:  $detector,
+            uploadAction: 'CoreBundle::Action::Html5Upload',
+            onTransferFinished: function(e) {
+                Region.of( $detector.get(0) ).refresh()
+            },
+            onTransferComplete: function(resp) {
+                runAction('BannerSlider::Action::CreateImage',{
+                    image: resp.data.file,
+                    category_id: {{category.id}}
+                });
+            }
+        });
+    });
+    </script>
+</div>
+{% endfor %}
+<div class="clear"> </div>
+
+<script>
+// initialize sortable
+$(function() {
+    $('.sortable').each(function(i,e) {
+        initSortableAction($(this), {
+            onUpdate: function(resp) {
+                if ( window.console ) {
+                    console.log(resp);
+                }
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

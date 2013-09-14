@@ -1,0 +1,50 @@
+{# /bs/news/crud/list #}
+{% extends '@CRUD/list.html' %}
+
+{% block list %}
+
+    {% if Plugin.config('with_category') %}
+
+    {% trans 'Category' %}:
+
+	{% if categoryCurrent.data.id %}
+		{{ categoryCurrent.data.name }}
+	{% else %}
+		{% trans 'All' %}
+	{% endif %}
+
+    <select id="banner_category">
+
+		<option> </option>
+
+		<option value="0">{% trans 'All' %}</option>
+
+        {% for category in categoryItems %}
+			<option value="{{ category.data.id }}" {% if category.data.id == categoryId %} selected {% endif %}>
+				{{ category.data.name }}
+			</option>
+        {% endfor %}
+
+    </select>
+
+    <script> 
+        $(function() {
+            $('select#banner_category').change(function() {
+                Region.of( this ).refreshWith({  category_id: $(this).val()  });
+            });
+        });
+    </script>
+    <div class="clear"> </div>
+    {% endif %}
+    <div class="clear"> </div>
+
+    {% if not CRUD.Items %}
+        <div> {% trans 'No Data' %} </div>
+    {% endif %}
+
+    {% for item in CRUD.Items %}
+        {% include 'BannerSlider/Templates/banner_image/image.html' %}
+    {% endfor %}
+
+    <div class="clear"> </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{# 
+vim:filetype=htmldjango:
+#}
+{% extends '@CRUD/edit.html' %}
+
+{% set plugin = Kernel.plugin('BannerSlider') %}
+
+{% block section_body %}
+<form class="ajax-action" enctype="multipart/form-data" method="POST">
+    {{ forms.action( CRUD.Action.signature ) }}
+
+    {% if plugin.config('with_category') %}
+        {{ CRUD.Action.renderField('category_id') |raw }}
+    {% endif %}
+
+
+    {% if CRUD.Record.id %}
+        {{ forms.hidden('id', CRUD.Record.id) }}
+    {% endif %}
+
+    {{ CRUD.Action.renderField('image') |raw }}
+
+    <div class="clear"> </div>
+
+    {{ CRUD.Action.renderField('thumb') |raw }}
+    <div class="clear"> </div>
+
+    {{ CRUD.Action.renderField('subtitle') |raw }}
+
+    {{ CRUD.Action.renderField('link') |raw }}
+
+    {% include '@CRUD/controll.html' %}
+</form>
+{% endblock %}
