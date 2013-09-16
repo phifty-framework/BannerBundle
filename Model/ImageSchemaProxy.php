@@ -73,7 +73,7 @@ class ImageSchemaProxy extends RuntimeSchema
           'type' => 'varchar(256)',
           'isa' => 'str',
           'size' => 256,
-          'label' => 'Image',
+          'label' => '圖片',
         ),
     ),
   'thumb' => array( 
@@ -82,7 +82,7 @@ class ImageSchemaProxy extends RuntimeSchema
           'type' => 'varchar(256)',
           'isa' => 'str',
           'size' => 256,
-          'label' => 'Thumb Image',
+          'label' => '縮圖',
         ),
     ),
   'title' => array( 
@@ -91,7 +91,7 @@ class ImageSchemaProxy extends RuntimeSchema
           'type' => 'varchar(200)',
           'isa' => 'str',
           'size' => 200,
-          'label' => 'Title',
+          'label' => '標題',
           'renderAs' => 'TextInput',
           'widgetAttributes' => array( 
               'size' => 50,
@@ -104,7 +104,7 @@ class ImageSchemaProxy extends RuntimeSchema
           'type' => 'varchar(512)',
           'isa' => 'str',
           'size' => 512,
-          'label' => 'Subtitle',
+          'label' => '副標題',
           'renderAs' => 'TextInput',
           'widgetAttributes' => array( 
               'size' => 60,
@@ -117,7 +117,7 @@ class ImageSchemaProxy extends RuntimeSchema
           'type' => 'varchar(512)',
           'isa' => 'str',
           'size' => 512,
-          'label' => 'Link',
+          'label' => '連結',
           'renderAs' => 'TextInput',
           'widgetAttributes' => array( 
               'size' => 70,
@@ -133,7 +133,7 @@ class ImageSchemaProxy extends RuntimeSchema
           'renderAs' => 'SelectInput',
           'widgetAttributes' => array( 
             ),
-          'label' => 'Banner Category',
+          'label' => '橫幅類別',
         ),
     ),
   'ordering' => array( 
@@ -157,7 +157,7 @@ class ImageSchemaProxy extends RuntimeSchema
           'renderAs' => 'DateTimeInput',
           'widgetAttributes' => array( 
             ),
-          'label' => 'Created on',
+          'label' => '建立於',
           'default' => function() {
                 return date('c');
             },
@@ -176,7 +176,7 @@ class ImageSchemaProxy extends RuntimeSchema
           'default' => function() {
                 return date('c');
             },
-          'label' => 'Updated on',
+          'label' => '更新時間',
         ),
     ),
   'created_by' => array( 
