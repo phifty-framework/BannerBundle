@@ -90,7 +90,7 @@ class CategorySchemaProxy extends RuntimeSchema
           'type' => 'varchar(1024)',
           'isa' => 'str',
           'size' => 1024,
-          'label' => '敘述',
+          'label' => 'Description',
           'renderAs' => 'TextareaInput',
           'widgetAttributes' => array( 
             ),
@@ -160,7 +160,7 @@ class CategorySchemaProxy extends RuntimeSchema
           'renderAs' => 'DateTimeInput',
           'widgetAttributes' => array( 
             ),
-          'label' => '建立於',
+          'label' => 'Created on',
           'default' => function() {
                 return date('c');
             },
@@ -179,7 +179,7 @@ class CategorySchemaProxy extends RuntimeSchema
           'default' => function() {
                 return date('c');
             },
-          'label' => '更新時間',
+          'label' => 'Updated on',
         ),
     ),
   'created_by' => array( 
