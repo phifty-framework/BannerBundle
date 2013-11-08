@@ -40,7 +40,8 @@ class CategorySchema extends SchemaDeclare
         $this->mixin('I18N\\Model\\Mixin\\I18NSchema');
         $this->mixin('CommonBundle\\Model\\Mixin\\MetaSchema');
 
-        $this->many('images','BannerSlider\\Model\\ImageSchema','category_id','id');
+        $this->many('images','BannerSlider\\Model\\ImageSchema','category_id','id')
+            ->order('ordering','asc');
     }
 
     public function dataLabel() 
