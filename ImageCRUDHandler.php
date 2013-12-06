@@ -16,7 +16,6 @@ class ImageCRUDHandler extends CRUDHandler
 
     public function init()
     {
-        $this->bundle = BannerSlider::getInstance();
         parent::init();
     }
 
