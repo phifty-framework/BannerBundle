@@ -2,8 +2,9 @@
 {% extends '@CRUD/list.html' %}
 
 {% block list %}
+    {% set bundle = Kernel.bundle('BannerSlider') %}
 
-    {% if Plugin.config('with_category') %}
+    {% if bundle.config('with_category') %}
 
     {% trans 'Category' %}:
 
