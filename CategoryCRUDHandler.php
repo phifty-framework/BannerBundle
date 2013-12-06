@@ -10,6 +10,6 @@ class CategoryCRUDHandler extends \AdminUI\CRUDHandler
     public function init()
     {
         parent::init();
-        $this->plugin = BannerSlider::getInstance();
+        $this->bundle = BannerSlider::getInstance();
     }
 }
