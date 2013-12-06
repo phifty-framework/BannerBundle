@@ -9,9 +9,9 @@ class CreateImage extends \ActionKit\RecordAction\CreateRecordAction
     public function schema() 
     { 
         $this->useRecordSchema();
-        $plugin = \BannerSlider\BannerSlider::getInstance();
-        $thumbSizeLimit = $plugin->config('thumb.size_limit');
-        $imageSizeLimit = $plugin->config('image.size_limit');
+        $bundle = \BannerSlider\BannerSlider::getInstance();
+        $thumbSizeLimit = $bundle->config('thumb.size_limit');
+        $imageSizeLimit = $bundle->config('image.size_limit');
 
         $this->param( 'thumb' , 'Image' )
             ->sizeLimit( $thumbSizeLimit )

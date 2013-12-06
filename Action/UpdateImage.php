@@ -10,9 +10,9 @@ class UpdateImage extends \ActionKit\RecordAction\UpdateRecordAction
     { 
         $this->useRecordSchema();
 
-        $plugin = kernel()->plugin('BannerSlider');
-        $sizeLimit = ($c = $plugin->config('size_limit')) ? $c : 500;
-        $resizeWidth = ($c = $plugin->config('resize_width')) ? $c : 200;
+        $bundle = kernel()->plugin('BannerSlider');
+        $sizeLimit = ($c = $bundle->config('size_limit')) ? $c : 500;
+        $resizeWidth = ($c = $bundle->config('resize_width')) ? $c : 200;
 
         $this->param( 'thumb' , 'Image' )
             ->sizeLimit( $sizeLimit )
