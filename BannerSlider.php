@@ -20,7 +20,7 @@ class BannerSlider extends Bundle
         kernel()->event->register('phifty.before_action', function() {
             kernel()->action->registerAction('BannerSlider\\Action\\SortImage', 
                 '@ActionKit/RecordAction.html.twig', array( 
-                    'base_class' => 'SortableBundle\\Action\\SortRecordAction',
+                    'base_class' => 'SortablePlugin\\Action\\SortRecordAction',
                     'record_class' => 'BannerSlider\\Model\\Image',
                 ));
         });
