@@ -7,11 +7,11 @@
 
     <div style=" text-align: right;">
         <input type="button" class="button edit" style=" font-size: 12px; padding:3px 5px; "
-            onclick=" Region.before( $(this).parents('.section').get(0) , '/bs/banner_image/crud/edit',{ id: {{ item.id }} });"
+            onclick=" Region.before( $(this).parents('.section').get(0) , '/bs/{{ Handler.crudId }}/crud/edit',{ id: {{ item.id }} });"
             value="{% trans 'Edit' %}"/>
     </div>
     <div class="close" 
-        onclick=" runAction( 'BannerSlider::Action::DeleteImage',
+        onclick=" runAction( '{{ Handler.namespace }}::Action::DeleteImage',
         { id: {{ item.id }}  },
         { confirm: '確認刪除? ', remove: $(this).parents('.image-cover') } ); ">
     </div>
