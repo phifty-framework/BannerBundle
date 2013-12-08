@@ -24,7 +24,7 @@ extends \BannerSlider\Model\CategoryBase
 
     public function getImagesByPlaceHolder($holder)
     {
-        $this->load(array( 'place_holder' => $holder ));
+        $this->load(array( 'handle' => $holder ));
         if($this->id)
             return $this->getImages();
         return array();

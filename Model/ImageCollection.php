@@ -12,11 +12,11 @@ extends \BannerSlider\Model\ImageCollectionBase
     );
 
     /**
-     * $images = ImageCollection::by_placeholder('index');
+     * $images = ImageCollection::byHandle('index');
      */
-    public static function by_placeholder($identity)
+    public static function byHandle($identity)
     {
-        $c = new Category( array('place_holder' => $identity, 'lang' => kernel()->locale->current() ) );
+        $c = new Category( array('handle' => $identity, 'lang' => kernel()->locale->current() ) );
         if ( ! $c->id ) {
             return;
         }

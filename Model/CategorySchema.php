@@ -8,10 +8,10 @@ class CategorySchema extends SchemaDeclare
     {
         $this->table('banner_categories');
 
-        $this->column('place_holder')
+        $this->column('handle')
             ->varchar(64)
             ->required(true)
-            ->label('放置位置');
+            ->label('操作符');
 
         $this->column('name')
             ->varchar(128)
@@ -44,9 +44,9 @@ class CategorySchema extends SchemaDeclare
             ->order('ordering','asc');
     }
 
-    public function dataLabel() 
+    public function dataLabel()
     {
-        return sprintf( '%s (%s)', $this->name , $this->place_holder );
+        return sprintf( '%s (%s)', $this->name , $this->handle );
     }
 }
 
