@@ -5,7 +5,7 @@ use AdminUI\CRUDHandler;
 
 /**
  * $category = new BannerSlider\Model\Category
- * $images = $category->getImagesByPlaceHolder('index');
+ * $images = $category->getImagesByHandle('index');
  */
 
 class ImageCRUDHandler extends CRUDHandler

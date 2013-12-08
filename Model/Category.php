@@ -10,23 +10,22 @@ extends \BannerSlider\Model\CategoryBase
     public function dataLabel()
     {
         $label = $this->name;
-        if( $this->width && $this->height )
+        if ( $this->width && $this->height ) {
             $label .= sprintf(' (%dx%d)',$this->width,$this->height);
+        }
         return $label;
     }
 
-    public function getImages()
-    {
-        $images = $this->images;
-        $images->order('ordering','asc');
-        return $images;
+    public function getImages() {
+        return $this->images;
     }
 
-    public function getImagesByPlaceHolder($holder)
+    public function getImagesByHandle($holder)
     {
         $this->load(array( 'handle' => $holder ));
-        if($this->id)
-            return $this->getImages();
+        if ($this->id) {
+            return $this->images;
+        }
         return array();
     }
 }

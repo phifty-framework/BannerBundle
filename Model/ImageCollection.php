@@ -1,10 +1,7 @@
 <?php
 namespace BannerSlider\Model;
 
-
-
-class ImageCollection 
-extends \BannerSlider\Model\ImageCollectionBase
+class ImageCollection extends \BannerSlider\Model\ImageCollectionBase
 {
     public $defaultOrdering = array(
         array('ordering','asc'),
@@ -14,16 +11,18 @@ extends \BannerSlider\Model\ImageCollectionBase
     /**
      * $images = ImageCollection::byHandle('index');
      */
-    public static function byHandle($identity)
+    public static function byHandle($handle, $lang = null)
     {
-        $c = new Category( array('handle' => $identity, 'lang' => kernel()->locale->current() ) );
+        $c = new Category;
+        $c->load( array('handle' => $handle, 'lang' => $lang ? $lang : kernel()->locale->current() ) );
+        if ( ! $c->id ) {
+            $c->load( array( 'handle' => $handle ) );
+        }
         if ( ! $c->id ) {
             return;
         }
         $collection = new self;
-        $collection->where()
-            ->equal('category_id',$c->id);
+        $collection->where()->equal('category_id',$c->id);
         return $collection;
     }
-    
 }
