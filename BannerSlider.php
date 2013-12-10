@@ -9,6 +9,16 @@ use Phifty\Web\RegionPager;
 class BannerSlider extends Bundle
 {
 
+    public function defaultConfig()
+    {
+        return array(
+            'with_link' => true,
+            'with_title' => true,
+            'with_subtitle' => true,
+            'with_thumb' => true,
+        );
+    }
+
     public function init()
     {
         $this->expandRoute( '/bs/banner_category' , 'BannerSlider\\CategoryCRUDHandler' );

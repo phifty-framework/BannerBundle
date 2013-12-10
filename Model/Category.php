@@ -13,6 +13,9 @@ extends \BannerSlider\Model\CategoryBase
         if ( $this->width && $this->height ) {
             $label .= sprintf(' (%dx%d)',$this->width,$this->height);
         }
+        if ( $this->lang ) {
+            $label .= ' (' . _($this->lang) . ')';
+        }
         return $label;
     }
 

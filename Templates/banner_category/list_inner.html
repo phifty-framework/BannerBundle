@@ -40,17 +40,22 @@
         {{ category.name }} ({{ category.handle }})
 
         <span class="control">
+            {% if CRUD.Object.canEdit %}
             <input 
                 type="button"
                 class="button category-edit" 
                 onclick=" Region.before( $(this).parents('.section').get(0) , '/bs/banner_category/crud/edit',{ id: {{ category.id }} });"
                 value="{% trans 'Edit' %}"/>
+            {% endif %}
+
+            {% if CRUD.Object.canDelete %}
             <input type="button" 
                 class="button category-delete" 
                 onclick=" runAction( 'BannerSlider::Action::DeleteCategory',
                     { id: {{ category.id }}  },
                     { confirm: '確認刪除? ', remove: $(this).parents('.banner-category') } );" 
                 value="{% trans 'Delete' %}"/>
+            {% endif %}
         </span>
     </div>
     <div id="banner-category-images-{{ category.id }}" 
