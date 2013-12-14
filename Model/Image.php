@@ -15,7 +15,7 @@ class Image extends \BannerSlider\Model\ImageBase
      * @param string $templateName
      * @param array $args
      */
-    public function renderAs($templateName, $args = array() 
+    public function renderAs($templateName, $args = array() )
     {
         $view = kernel()->view();
         return $view->render($templateName, array_merge(array( 'image' => $this ), $args));
