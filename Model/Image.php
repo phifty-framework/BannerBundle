@@ -1,26 +1,29 @@
 <?php
 namespace BannerSlider\Model;
 
-
-
-class Image 
-extends \BannerSlider\Model\ImageBase
+class Image extends \BannerSlider\Model\ImageBase
 {
     public function __toString()
     {
         return $this->render();
     }
 
+
+    /**
+     * Render this image object with specific template.
+     *
+     * @param string $templateName
+     * @param array $args
+     */
+    public function renderAs($templateName, $args = array() 
+    {
+        $view = kernel()->view();
+        return $view->render($templateName, array_merge(array( 'image' => $this ), $args));
+    }
+
     public function render()
     {
-        if( $this->link )
-        {
-            return sprintf('<a href="%s"><img alt="%s" src="/%s"/></a>',
-                $this->link, 
-                $this->subtitle,
-                $this->image ) . "\n";
-        }
-        return sprintf('<img alt="%s" src="/%s"/>', $this->subtitle, $this->image ) . "\n";
+        $view = kernel()->view();
+        return $view->render("@BannerSlider/image.html", array( 'image' => $this ));
     }
-    
 }
