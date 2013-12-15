@@ -1,0 +1,11 @@
+{#
+vim:filetype=htmldjango:
+#}
+{# template for rendering banner image item #}
+{% if image.link %}
+<a href="{{ image.link }}">
+    <img alt="{{image.subtitle}}" src="/{{image.image}}"/>
+</a>
+{% else %}
+    <img alt="{{image.subtitle}}" src="/{{image.image}}"/>
+{% endif %}
