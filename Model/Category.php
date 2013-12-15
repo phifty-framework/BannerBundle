@@ -23,9 +23,21 @@ extends \BannerSlider\Model\CategoryBase
         return $this->images;
     }
 
-    public function getImagesByHandle($holder)
+    public static function byHandle($handle, $lang = null) 
     {
-        $this->load(array( 'handle' => $holder ));
+        if (! $lang ) {
+            $lang = kernel()->locale->current();
+        }
+        $category = new self(array( 'handle' => $handle, 'lang' => $lang ));
+        if ( $category->id ) {
+            return $category;
+        }
+        return new self(array( 'handle' => $handle ));
+    }
+
+    public function getImagesByHandle($handle)
+    {
+        $this->load(array( 'handle' => $handle ));
         if ($this->id) {
             return $this->images;
         }
