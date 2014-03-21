@@ -11,7 +11,7 @@ class CategorySchema extends SchemaDeclare
         $this->column('handle')
             ->varchar(64)
             ->required(true)
-            ->label('操作符');
+            ->label('程式標記');
 
         $this->column('name')
             ->varchar(128)
