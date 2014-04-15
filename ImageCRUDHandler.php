@@ -51,6 +51,6 @@ class ImageCRUDHandler extends CRUDHandler
                 'categoryId'      => $categoryId,
                 'categoryCurrent' => $category,
         ));
-        return $this->renderCrudList();
+        return $this->renderList();
     }
 }
