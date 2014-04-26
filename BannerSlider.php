@@ -25,7 +25,7 @@ class BannerSlider extends Bundle
         $this->expandRoute( '/bs/banner_image'    , 'BannerSlider\\ImageCRUDHandler' );
 
         if( $this->config( 'with_category' ) )
-            $this->addCRUDAction( 'Category' , array('Create','Update','Delete') );
+            $this->addRecordAction( 'Category' , array('Create','Update','Delete') );
 
         kernel()->event->register('phifty.before_action', function() {
             kernel()->action->registerAction('BannerSlider\\Action\\SortImage', 
