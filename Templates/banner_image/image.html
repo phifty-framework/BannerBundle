@@ -1,22 +1,15 @@
-<div class="image-cover">
+<div class="cover large-height pull-left">
     <input type="hidden" name="image_id" value="{{ item.id }}"/>
-    <div class="cut">
-        <a rel="facebox" target="_blank" href="/{{ item.image }}"><img src="/{{ item.thumb }}"></a>
-    </div>
-    {% if item.title %}
-    <div class="title">{{ item.title | default('No name') }} </div>
-    {% else %}
-    <div class="title">{{ item.subtitle | default('No name') }} </div>
-    {% endif %}
 
-    <div style=" text-align: right;">
-        <input type="button" class="button edit" style=" font-size: 12px; padding:3px 5px; "
-            onclick=" Region.before( $(this).parents('.section').get(0) , '/bs/banner_image/crud/edit',{ id: {{ item.id }} });"
-            value="{% trans 'Edit' %}"/>
+    <a data-lightbox="banner-image-{{item.category_id}}" {% if item.title %}data-title="{{item.title}}"{% endif %} target="_blank" href="/{{ item.image }}"><img src="/{{ item.thumb }}"></a>
+
+    {% if item.title %}
+    <div class="title">{{ item.title | default('無標題') }} </div>
+    {% else %}
+    <div class="title">{{ item.subtitle | default('無標題') }} </div>
+    {% endif %}
+    <div>
+        <button data-record-id="{{item.id}}" class="button edit" style=" font-size: 12px; padding:3px 5px;">{% trans  '編輯' %}</button>
     </div>
-    <div class="close" 
-        onclick=" runAction( '{{ Handler.namespace }}::Action::DeleteImage',
-        { id: {{ item.id }}  },
-        { confirm: '確認刪除? ', remove: $(this).parents('.image-cover') } ); ">
-    </div>
+    <div data-record-id="{{item.id}}" class="close"> </div>
 </div>
