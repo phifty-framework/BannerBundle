@@ -8,10 +8,12 @@ class DeleteImage extends \ActionKit\RecordAction\DeleteRecordAction
 
     public function run() 
     {
-        if ( file_exists($this->record->thumb ) )
+        if ( file_exists($this->record->thumb ) ) {
             unlink( $this->record->thumb );
-        if ( file_exists($this->record->image ) )
+        }
+        if ( file_exists($this->record->image ) ) {
             unlink( $this->record->image );
+        }
         return parent::run();
     }
 }

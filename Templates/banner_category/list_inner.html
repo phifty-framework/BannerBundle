@@ -1,5 +1,10 @@
 {% extends "@CRUD/list_inner.html" %}
 {% block list %}
+<script>
+$(function() {
+    Holder.add_theme("free", { background: "#fff", text: "Free Size" })
+});
+</script>
 <style>
     .ui-placeholder { 
         height: 100px; 
@@ -25,6 +30,12 @@
         margin-left: 20px;
         color: #aaa;
         font-weight: bold;
+    }
+
+
+    .dropzone.dropbox-drag-over {
+        border: 1px solid #88bb33;
+        background: #cf6;
     }
 </style>
 
@@ -63,23 +74,72 @@
         data-items=".image-cover"
         data-action="BannerSlider::Action::SortImage"
         data-fields=".image-cover input[type=hidden]"
-        >
+        data-image-width="{{category.width}}"
+        data-image-height="{{category.height}}">
+
+        <div id="previewContainer{{category.id}}" class="cover" style="float: left; position: relative;">
+            <div id="dropzone{{category.id}}" class="dropzone" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;"> </div>
+            {% if category.width and category.height %}
+                <img data-src="holder.js/{{category.width}}x{{category.height}}/auto"/>
+            {% else %}
+                <img data-src="holder.js/300x150/text:Free Size"/>
+            {% endif %}
+        </div>
+        <script>
+        $(function() {
+            Holder.run({images: $('#previewContainer{{category.id}} img').get(0) });
+
+            var $container = $('#previewContainer{{category.id}}');
+            var $dropzone = $container.find('.dropzone');
+
+            var $progress = $('<div/>').addClass("upload-progress")
+                $progress.hide().appendTo($container);
+
+            var uploader = new FiveKit.DropBoxUploader({ 
+                el: $dropzone,
+                queueEl: $progress,
+                action: 'CoreBundle::Action::Html5Upload',
+                onDrop: function(e) {
+                    $progress.empty().show();
+                },
+                onTransferComplete: function(e,result) {
+                    if ( result.success ) {
+                        if ( result.data && result.data.file ) {
+                            runAction('BannerSlider::Action::CreateImage',{
+                                image: result.data.file,
+                                title: (result.data.basename || 'Untitled'),
+                                category_id: {{category.id}}
+                            });
+                        } else {
+                            console.error('Missing data');
+                        }
+                    }
+                },
+                onTransferFinished: function(e) {
+                    $progress.fadeOut()
+                    Region.of($container).refresh()
+                }
+            });
+        });
+        </script>
+        <div class="clearfix"> </div>
 
         {% set images = category.getImages() %}
-
         {% if not images.size() %}
             <div class="no-data">{% trans 'Currently no images in this category' %}</div>
         {% endif %}
         {% for item in images %}
             {% include '@BannerSlider/banner_image/image.html' %}
         {% endfor %}
+
+
         <div class="clear"> </div>
     </div>
     <div class="clear"> </div>
 
-    <!-- drag-drop box -->
-    <div id="dropbox-container-{{ category.id }}" 
-        class="dropbox-container">
+
+    {#
+    <div id="dropbox-container-{{ category.id }}" class="dropbox-container">
     </div>
     <script type="text/javascript">
     $(function() {
@@ -101,6 +161,8 @@
         });
     });
     </script>
+    #}
+
 </div>
 {% endfor %}
 <div class="clear"> </div>

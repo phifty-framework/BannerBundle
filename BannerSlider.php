@@ -12,6 +12,16 @@ class BannerSlider extends Bundle
     public function defaultConfig()
     {
         return array(
+            'BannerImage' => [
+                'link' => false,
+                'title' => false,
+                'subtitle' => false,
+                'thumb' => false,
+            ],
+            'BannerCategory' => [
+                'enable' => false,
+            ],
+            // for backward compatibility
             'with_link' => true,
             'with_title' => true,
             'with_subtitle' => true,
@@ -21,19 +31,14 @@ class BannerSlider extends Bundle
 
     public function init()
     {
-        $this->expandRoute( '/bs/banner_category' , 'BannerSlider\\CategoryCRUDHandler' );
-        $this->expandRoute( '/bs/banner_image'    , 'BannerSlider\\ImageCRUDHandler' );
+        $this->expandRoute( '/bs/banner_category' , 'CategoryCRUDHandler' );
+        $this->expandRoute( '/bs/banner_image'    , 'ImageCRUDHandler' );
 
-        if( $this->config( 'with_category' ) )
-            $this->addRecordAction( 'Category' , array('Create','Update','Delete') );
+        if ( $this->config( 'BannerCategory.enable' ) ) {
+            $this->addRecordAction('Category');
+        }
 
-        kernel()->event->register('phifty.before_action', function() {
-            kernel()->action->registerAction('BannerSlider\\Action\\SortImage', 
-                '@ActionKit/RecordAction.html.twig', array( 
-                    'base_class' => 'SortablePlugin\\Action\\SortRecordAction',
-                    'record_class' => 'BannerSlider\\Model\\Image',
-                ));
-        });
+        $this->addRecordAction('Image', [ 'Sort' ]);
 
         $label = $this->config('label') ?: _('Banner');
 

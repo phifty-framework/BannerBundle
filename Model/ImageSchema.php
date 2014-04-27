@@ -10,10 +10,12 @@ class ImageSchema extends SchemaDeclare
     {
         $this->column('image')
             ->varchar(256)
+            ->contentType('ImageFile')
             ->label( _('大圖') );
 
         $this->column('thumb')
             ->varchar(256)
+            ->contentType('ImageFile')
             ->label( _('縮圖') );
 
         $this->column('title')
@@ -46,15 +48,10 @@ class ImageSchema extends SchemaDeclare
         $this->column('category_id')
             ->integer()
             ->refer('BannerSlider\\Model\\CategorySchema')
-            ->renderAs('SelectInput')
+            ->renderAs('SelectInput', [ 'allow_empty' => true ])
             ->label( _('Banner 類別') );
 
-        $this->column('ordering')
-            ->integer()
-            ->default(0)
-            ->renderAs('HiddenInput')
-            ;
-
+        $this->mixin('SortablePlugin\\Model\\Mixin\\OrderingSchema');
         $this->mixin('CommonBundle\\Model\\Mixin\\MetaSchema');
 
         /** self accessor , ( foreign schema, column ) , self column ) **/
