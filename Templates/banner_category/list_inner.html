@@ -77,7 +77,7 @@ $(function() {
         data-image-width="{{category.width}}"
         data-image-height="{{category.height}}">
 
-        <div id="previewContainer{{category.id}}" class="cover pull-left">
+        <div id="previewContainer{{category.id}}" class="cover medium-width pull-left">
             <div id="dropzone{{category.id}}" class="dropzone fill"> </div>
             {% if category.width and category.height %}
                 <img data-src="holder.js/{{category.width}}x{{category.height}}/auto"/>
