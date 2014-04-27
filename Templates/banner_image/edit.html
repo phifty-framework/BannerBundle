@@ -19,24 +19,24 @@ vim:filetype=htmldjango:
 
                 <div class="clear"> </div>
 
-                {% if Bundle.config('with_thumb') %}
+                {% if Bundle.config('BannerImage.thumb') %}
                     {{ CRUD.Action.renderField('thumb') |raw }}
                     <div class="clear"> </div>
                 {% endif %}
             </div>
             <div class="col-md-7">
-                {% if Bundle.config('with_category') %}
+                {% if Bundle.config('BannerImage.category') %}
                     {{ CRUD.Action.renderField('category_id') |raw }}
                 {% endif %}
 
-                {% if Bundle.config('with_title') %}
+                {% if Bundle.config('BannerImage.title') %}
                     {{ CRUD.Action.renderField('title') |raw }}
                 {% endif %}
-                {% if Bundle.config('with_subtitle') %}
+                {% if Bundle.config('BannerImage.subtitle') %}
                     {{ CRUD.Action.renderField('subtitle') |raw }}
                 {% endif %}
 
-                {% if Bundle.config('with_link') %}
+                {% if Bundle.config('BannerImage.link') %}
                     {{ CRUD.Action.renderField('link') |raw }}
                 {% endif %}
 
