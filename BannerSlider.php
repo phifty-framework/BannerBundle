@@ -22,6 +22,7 @@ class BannerSlider extends Bundle
                 'enable' => false,
             ],
             // for backward compatibility
+            // deprecated
             'with_link' => true,
             'with_title' => true,
             'with_subtitle' => true,
