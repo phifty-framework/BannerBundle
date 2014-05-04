@@ -81,8 +81,14 @@ $(function() {
             <div id="dropzone{{category.id}}" class="dropzone fill"> </div>
             {% if category.width and category.height %}
                 <img data-src="holder.js/{{category.width}}x{{category.height}}/auto" style="max-width: 100%;"/>
+            {% elseif category.width or category.height %}
+                {% if category.width %}
+                    <img data-src="holder.js/120x120/text:{{category.width}} x Any/auto" style="max-width: 100%;"/>
+                {% else %}
+                    <img data-src="holder.js/120x120/text:Any x {{category.height}}/auto" style="max-width: 100%;"/>
+                {% endif %}
             {% else %}
-                <img data-src="holder.js/300x150/text:Free Size" style="max-width: 650px;"/>
+                <img data-src="holder.js/300x150/text:Any Size" style="max-width: 650px;"/>
             {% endif %}
         </div>
         <script>
@@ -123,6 +129,10 @@ $(function() {
         });
         </script>
         <div class="clearfix"> </div>
+
+        {% if category.remark %}
+        <div class="clearfix">{{category.remark}}</div>
+        {% endif %}
 
         {% set images = category.getImages() %}
         {% if not images.size() %}
