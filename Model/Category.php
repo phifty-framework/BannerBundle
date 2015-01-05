@@ -28,11 +28,15 @@ extends \BannerSlider\Model\CategoryBase
         if (! $lang ) {
             $lang = kernel()->locale->current();
         }
-        $category = new self(array( 'handle' => $handle, 'lang' => $lang ));
-        if ( $category->id ) {
+        $category = new self;
+        $category->load(array( 'handle' => $handle, 'lang' => $lang ));
+        if ($category->id) {
             return $category;
         }
-        return new self(array( 'handle' => $handle ));
+        $category->load(array( 'handle' => $handle ));
+        if ($category->id) {
+            return $category;
+        }
     }
 
     public function getImagesByHandle($handle)
