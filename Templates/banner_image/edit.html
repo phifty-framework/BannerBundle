@@ -5,7 +5,9 @@ vim:filetype=htmldjango:
 
 {% block section_body %}
 <form class="ajax-action" enctype="multipart/form-data" method="POST">
-    {{ forms.action( CRUD.Action.signature ) }}
+    {{ CRUD.Action.renderSignatureWidget|raw }}
+    {{ CRUD.Action.renderCSRFTokenWidget|raw }}
+
 
     {% if CRUD.Record.id %}
         {{ forms.hidden('id', CRUD.Record.id) }}

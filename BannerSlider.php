@@ -39,7 +39,7 @@ class BannerSlider extends Bundle
             $this->addRecordAction('Category');
         }
 
-        $this->addRecordAction('Image', [ 'Sort' ]);
+        $this->addUpdateOrderingAction('Image');
 
         $label = $this->config('label') ?: _('Banner');
 
