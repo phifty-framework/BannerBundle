@@ -30,7 +30,7 @@ class ImageCRUDHandler extends CRUDHandler
         $collection = $this->getCollection();
         if( $categoryId )
             $collection->where( array( 'category_id' => $categoryId ) );
-        $collection->order( 'id' , 'desc' );
+        $collection->orderBy( 'id' , 'desc' );
 
         $page = $this->request->param('page') ?: 1;
         $pageSize = $this->request->param('pagenum') ?: 10;
