@@ -1,0 +1,21 @@
+{
+    "name": "corneltek/bannerbundle",
+    "authors": [
+        {
+            "name": "c9s",
+            "email": "yoanlin93@gmail.com"
+        }
+    ],
+    "type": "phifty-bundle",
+    "require": {
+      "corneltek/installers": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "BannerBundle\\": ""
+        }
+    },
+    "repositories": [
+        {"type": "composer", "url": "https://toran.corneltek.com/repo/private/"}
+    ]
+}
