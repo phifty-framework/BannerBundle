@@ -62,7 +62,7 @@ $(function() {
             {% if CRUD.Object.canDelete %}
             <input type="button" 
                 class="button category-delete" 
-                onclick=" runAction( 'BannerSlider::Action::DeleteCategory',
+                onclick=" runAction( 'BannerBundle::Action::DeleteCategory',
                     { id: {{ category.id }}  },
                     { confirm: '確認刪除? ', remove: $(this).parents('.banner-category') } );" 
                 value="{% trans 'Delete' %}"/>
@@ -72,7 +72,7 @@ $(function() {
     <div id="banner-category-images-{{ category.id }}" 
         class="banner-category-images sortable"
         data-items=".cover"
-        data-action="BannerSlider::Action::UpdateImageOrdering"
+        data-action="BannerBundle::Action::UpdateImageOrdering"
         data-fields=".cover input[type=hidden]"
         data-image-width="{{category.width}}"
         data-image-height="{{category.height}}">
@@ -111,7 +111,7 @@ $(function() {
                 onTransferComplete: function(e,result) {
                     if ( result.success ) {
                         if ( result.data && result.data.file ) {
-                            runAction('BannerSlider::Action::CreateImage',{
+                            runAction('BannerBundle::Action::CreateImage',{
                                 image: result.data.file,
                                 title: (result.data.basename || 'Untitled'),
                                 category_id: {{category.id}}
@@ -139,7 +139,7 @@ $(function() {
             <div class="no-data">{% trans '目前這個類別無圖片資料' %}</div>
         {% endif %}
         {% for item in images %}
-            {% include '@BannerSlider/banner_image/image.html' %}
+            {% include '@BannerBundle/banner_image/image.html' %}
         {% endfor %}
 
 
@@ -163,7 +163,7 @@ $(function() {
                 Region.of( $detector.get(0) ).refresh()
             },
             onTransferComplete: function(resp) {
-                runAction('BannerSlider::Action::CreateImage',{
+                runAction('BannerBundle::Action::CreateImage',{
                     image: resp.data.file,
                     category_id: {{category.id}}
                 });
@@ -183,7 +183,7 @@ $(function() {
 
     $('.cover > .close').click(function() {
         var id = $(this).data('recordId');
-        runAction( 'BannerSlider::Action::DeleteImage', { id: id }, { confirm: '確認刪除? ', remove: $(this).parents('.cover') } );
+        runAction( 'BannerBundle::Action::DeleteImage', { id: id }, { confirm: '確認刪除? ', remove: $(this).parents('.cover') } );
         return false;
     });
 

@@ -1,5 +1,5 @@
 <?php
-namespace BannerSlider\Model;
+namespace BannerBundle\Model;
 use LazyRecord\Schema\SchemaDeclare;
 
 class ImageSchema extends SchemaDeclare
@@ -47,7 +47,7 @@ class ImageSchema extends SchemaDeclare
 
         $this->column('category_id')
             ->integer()
-            ->refer('BannerSlider\\Model\\CategorySchema')
+            ->refer('BannerBundle\\Model\\CategorySchema')
             ->renderAs('SelectInput', [ 'allow_empty' => true ])
             ->label( _('Banner 類別') );
 
@@ -55,7 +55,7 @@ class ImageSchema extends SchemaDeclare
         $this->mixin('CommonBundle\\Model\\Mixin\\MetaSchema');
 
         /** self accessor , ( foreign schema, column ) , self column ) **/
-        $this->belongsTo('category', 'BannerSlider\\Model\\CategorySchema' , 'id' , 'category_id' );
+        $this->belongsTo('category', 'BannerBundle\\Model\\CategorySchema' , 'id' , 'category_id' );
     }
 }
 

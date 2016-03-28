@@ -1,10 +1,10 @@
 <?php
-namespace BannerSlider\Model;
+namespace BannerBundle\Model;
 
 
 
 class CategoryCollection 
-extends \BannerSlider\Model\CategoryCollectionBase
+extends \BannerBundle\Model\CategoryCollectionBase
 {
 
     

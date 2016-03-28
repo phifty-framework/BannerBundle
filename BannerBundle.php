@@ -1,12 +1,12 @@
 <?php
-namespace BannerSlider;
+namespace BannerBundle;
 use Phifty\Bundle;
 use Phifty\Routing\RouteSet;
 use Phifty\Region;
 use Phifty\CRUDHandler;
 use Phifty\Web\RegionPager;
 
-class BannerSlider extends Bundle
+class BannerBundle extends Bundle
 {
 
     public function defaultConfig()

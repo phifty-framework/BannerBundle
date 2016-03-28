@@ -1,17 +1,17 @@
 <?php
-namespace BannerSlider;
+namespace BannerBundle;
 use Phifty\Web\RegionPager;
 use AdminUI\CRUDHandler;
 
 /**
- * $category = new BannerSlider\Model\Category
+ * $category = new BannerBundle\Model\Category
  * $images = $category->getImagesByHandle('index');
  */
 
 class ImageCRUDHandler extends CRUDHandler
 {
     /* CRUD Attributes */
-    public $modelClass = 'BannerSlider\\Model\\Image';
+    public $modelClass = 'BannerBundle\\Model\\Image';
     public $crudId     = 'banner_image';
 
     public function init()
@@ -21,7 +21,7 @@ class ImageCRUDHandler extends CRUDHandler
 
     public function listRegionAction()
     {
-        $category = new \BannerSlider\Model\Category;
+        $category = new \BannerBundle\Model\Category;
         $categoryCollection = $category->asCollection();
 
         $categoryId = (int) $this->request->param('category_id');

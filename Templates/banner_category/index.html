@@ -7,7 +7,7 @@
         {# append a region after the div.section, if user clicks "Create" #}
         <input type="button" 
             class="button record-create-btn"
-            value="建立新的{{ new('BannerSlider\\Model\\Image').getLabel() }}" 
+            value="建立新的{{ new('BannerBundle\\Model\\Image').getLabel() }}" 
             onclick=" Region.after( $(this).parents('.section').get(0), 
                 '/bs/banner_image/crud/create' ); return false;"/>
     {% endif %}

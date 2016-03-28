@@ -1,15 +1,15 @@
 <?php
-namespace BannerSlider\Action;
+namespace BannerBundle\Action;
 use Phifty\FileUtils;
 
 class CreateImage extends \ActionKit\RecordAction\CreateRecordAction
 {
-    public $recordClass = 'BannerSlider\\Model\\Image';
+    public $recordClass = 'BannerBundle\\Model\\Image';
 
     public function schema() 
     { 
         $this->useRecordSchema();
-        $bundle = \BannerSlider\BannerSlider::getInstance();
+        $bundle = \BannerBundle\BannerBundle::getInstance();
         $thumbSizeLimit = $bundle->config('thumb.size_limit');
         $imageSizeLimit = $bundle->config('image.size_limit');
 

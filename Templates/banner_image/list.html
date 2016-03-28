@@ -2,7 +2,7 @@
 {% extends '@CRUD/list.html' %}
 
 {% block list %}
-    {% set bundle = Kernel.bundle('BannerSlider') %}
+    {% set bundle = Kernel.bundle('BannerBundle') %}
 
     {% if bundle.config('with_category') %}
 
@@ -44,7 +44,7 @@
     {% endif %}
 
     {% for item in CRUD.Items %}
-        {% include 'BannerSlider/Templates/banner_image/image.html' %}
+        {% include 'BannerBundle/Templates/banner_image/image.html' %}
     {% endfor %}
 
     <div class="clear"> </div>

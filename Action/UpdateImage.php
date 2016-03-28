@@ -1,16 +1,16 @@
 <?php
-namespace BannerSlider\Action;
+namespace BannerBundle\Action;
 use Phifty\FileUtils;
 
 class UpdateImage extends \ActionKit\RecordAction\UpdateRecordAction
 {
-    public $recordClass = 'BannerSlider\Model\Image';
+    public $recordClass = 'BannerBundle\Model\Image';
 
     function schema() 
     { 
         $this->useRecordSchema();
 
-        $bundle = kernel()->bundle('BannerSlider');
+        $bundle = kernel()->bundle('BannerBundle');
         $sizeLimit = ($c = $bundle->config('size_limit')) ? $c : 500;
         $resizeWidth = ($c = $bundle->config('resize_width')) ? $c : 200;
 

@@ -1,5 +1,5 @@
 <?php
-namespace BannerSlider\Model;
+namespace BannerBundle\Model;
 use LazyRecord\Schema\SchemaDeclare;
 
 class CategorySchema extends SchemaDeclare
@@ -51,7 +51,7 @@ class CategorySchema extends SchemaDeclare
         $this->mixin('I18N\\Model\\Mixin\\I18NSchema');
         $this->mixin('CommonBundle\\Model\\Mixin\\MetaSchema');
 
-        $this->many('images','BannerSlider\\Model\\ImageSchema','category_id','id')
+        $this->many('images','BannerBundle\\Model\\ImageSchema','category_id','id')
             ->orderBy('ordering','asc');
     }
 

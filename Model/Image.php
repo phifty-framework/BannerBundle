@@ -1,7 +1,7 @@
 <?php
-namespace BannerSlider\Model;
+namespace BannerBundle\Model;
 
-class Image extends \BannerSlider\Model\ImageBase
+class Image extends \BannerBundle\Model\ImageBase
 {
     public function __toString()
     {
@@ -24,6 +24,6 @@ class Image extends \BannerSlider\Model\ImageBase
     public function render()
     {
         $view = kernel()->view();
-        return $view->render("@BannerSlider/image.html", array( 'image' => $this ));
+        return $view->render("@BannerBundle/image.html", array( 'image' => $this ));
     }
 }

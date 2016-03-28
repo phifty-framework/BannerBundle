@@ -1,10 +1,10 @@
 <?php
-namespace BannerSlider\Model;
+namespace BannerBundle\Model;
 
 
 
 class Category 
-extends \BannerSlider\Model\CategoryBase
+extends \BannerBundle\Model\CategoryBase
 {
 
     public function dataLabel()

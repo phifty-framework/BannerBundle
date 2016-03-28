@@ -1,10 +1,10 @@
 <?php
-namespace BannerSlider\Action;
+namespace BannerBundle\Action;
 use Phifty\FileUtils;
 
 class DeleteCategory extends \ActionKit\RecordAction\DeleteRecordAction
 {
-    public $recordClass = 'BannerSlider\\Model\\Category';
+    public $recordClass = 'BannerBundle\\Model\\Category';
 
     public function run() {
         foreach( $this->record->images as $image ) {

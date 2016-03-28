@@ -1,10 +1,10 @@
 <?php
-namespace BannerSlider\Action;
+namespace BannerBundle\Action;
 use Phifty\FileUtils;
 
 class DeleteImage extends \ActionKit\RecordAction\DeleteRecordAction
 {
-    public $recordClass = 'BannerSlider\\Model\\Image';
+    public $recordClass = 'BannerBundle\\Model\\Image';
 
     public function run() 
     {

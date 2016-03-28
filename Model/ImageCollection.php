@@ -1,7 +1,7 @@
 <?php
-namespace BannerSlider\Model;
+namespace BannerBundle\Model;
 
-class ImageCollection extends \BannerSlider\Model\ImageCollectionBase
+class ImageCollection extends \BannerBundle\Model\ImageCollectionBase
 {
     public $defaultOrdering = array(
         array('ordering','asc'),
