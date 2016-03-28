@@ -4,50 +4,39 @@ vim:filetype=htmldjango:
 {% extends '@CRUD/edit.html' %}
 
 {% block section_body %}
-<form class="ajax-action" enctype="multipart/form-data" method="POST">
+<form class="ajax-action form-horizontal" enctype="multipart/form-data" method="POST">
     {{ CRUD.Action.renderSignatureWidget|raw }}
     {{ CRUD.Action.renderCSRFTokenWidget|raw }}
-
-
     {% if CRUD.Record.id %}
-        {{ forms.hidden('id', CRUD.Record.id) }}
+      {{ CRUD.Action.renderField('id') |raw }}
     {% endif %}
 
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-3">
-                {{ CRUD.Action.renderField('image') |raw }}
-
-                <div class="clear"> </div>
-
-                {% if Bundle.config('BannerImage.thumb') %}
-                    {{ CRUD.Action.renderField('thumb') |raw }}
-                    <div class="clear"> </div>
-                {% endif %}
-            </div>
-            <div class="col-md-7">
-                {% if Bundle.config('BannerImage.category') %}
-                    {{ CRUD.Action.renderField('category_id') |raw }}
-                {% endif %}
-
-                {% if Bundle.config('BannerImage.title') %}
-                    {{ CRUD.Action.renderField('title') |raw }}
-                {% endif %}
-                {% if Bundle.config('BannerImage.subtitle') %}
-                    {{ CRUD.Action.renderField('subtitle') |raw }}
-                {% endif %}
-
-                {% if Bundle.config('BannerImage.link') %}
-                    {{ CRUD.Action.renderField('link') |raw }}
-                {% endif %}
-
-                {{ CRUD.Action.renderField('comment') |raw }}
-            </div>
-        </div>
+    <div class="row">
+      <div class="col-md-6">
+        {{ CRUD.Action.renderField('image') |raw }}
+      </div>
+      <div class="col-md-6">
+      {% if Bundle.config('BannerImage.thumb') %}
+        {{ CRUD.Action.renderField('thumb') |raw }}
+      {% endif %}
+      </div>
     </div>
 
+    {% if Bundle.config('BannerImage.category') %}
+        {{ CRUD.Action.renderField('category_id') |raw }}
+    {% endif %}
 
+    {% if Bundle.config('BannerImage.title') %}
+        {{ CRUD.Action.renderField('title') |raw }}
+    {% endif %}
+    {% if Bundle.config('BannerImage.subtitle') %}
+        {{ CRUD.Action.renderField('subtitle') |raw }}
+    {% endif %}
 
+    {% if Bundle.config('BannerImage.link') %}
+        {{ CRUD.Action.renderField('link') |raw }}
+    {% endif %}
+
+    {{ CRUD.Action.renderField('comment') |raw }}
 </form>
 {% endblock %}

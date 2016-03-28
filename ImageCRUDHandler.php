@@ -14,6 +14,8 @@ class ImageCRUDHandler extends CRUDHandler
     public $modelClass = 'BannerBundle\\Model\\Image';
     public $crudId     = 'banner_image';
 
+    protected $applyRequestFields = ['category_id'];
+
     public function init()
     {
         parent::init();

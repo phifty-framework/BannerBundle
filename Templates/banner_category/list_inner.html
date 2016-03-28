@@ -31,37 +31,36 @@ $(function() {
         color: #aaa;
         font-weight: bold;
     }
-
-
     .dropzone.dropbox-drag-over {
         border: 1px solid #88bb33;
         background: #cf6;
     }
 </style>
 
-<div class="clear"> </div>
+
 {% if not CRUD.Items %}
     <div class="notice">目前無資料</div>
 {% endif %}
 
 {% for category in CRUD.Items %}
-
 <div class="banner-category">
     <div class="category-name">
         {{ category.name }} ({{ category.handle }})
 
         <span class="control">
+            <button type="button" class="btn btn-primary btn-create-banner" data-category-id="{{category.id}}">新增橫幅</button>
+
             {% if CRUD.Object.canEdit %}
             <input 
                 type="button"
-                class="button category-edit" 
-                onclick=" Region.before( $(this).parents('.section').get(0) , '/bs/banner_category/crud/edit',{ id: {{ category.id }} });"
+                class="btn btn-primary btn-edit-category"
+                data-category-id="{{category.id}}"
                 value="{% trans 'Edit' %}"/>
             {% endif %}
 
             {% if CRUD.Object.canDelete %}
             <input type="button" 
-                class="button category-delete" 
+                class="btn btn-primary category-delete" 
                 onclick=" runAction( 'BannerBundle::Action::DeleteCategory',
                     { id: {{ category.id }}  },
                     { confirm: '確認刪除? ', remove: $(this).parents('.banner-category') } );" 
@@ -181,28 +180,37 @@ $(function() {
 // initialize sortable
 $(function() {
 
-    $('.cover > .close').click(function() {
-        var id = $(this).data('recordId');
-        runAction( 'BannerBundle::Action::DeleteImage', { id: id }, { confirm: '確認刪除? ', remove: $(this).parents('.cover') } );
-        return false;
-    });
+  $('.btn-create-banner').click(function() {
+    var categoryId = $(this).data('category-id');
+    var defer = CRUDRelModal.open("新增橫幅",  "/bs/banner_image/crud/edit", { 'category_id': categoryId }, { size: 'large' } );
+  });
 
-    $('.cover .edit').click(function() {
-        var id = $(this).data('recordId');
-        console.log(id);
-        Region.before( $(this).parents('.section').get(0) , '/bs/banner_image/crud/edit',{ id: id });
-        return false;
-    });
+  $('.btn-edit-category').click(function() {
+    var categoryId = $(this).data('category-id');
+    var defer = CRUDRelModal.open("編輯橫幅類別",  "/bs/banner_category/crud/edit", { 'id': categoryId });
+  });
 
-    $('.sortable').each(function(i,e) {
-        initSortableAction($(this), {
-            onUpdate: function(resp) {
-                if ( window.console ) {
-                    console.log(resp);
-                }
-            }
-        });
+  $('.cover > .close').click(function() {
+      var id = $(this).data('recordId');
+      runAction( 'BannerBundle::Action::DeleteImage', { id: id }, { confirm: '確認刪除? ', remove: $(this).parents('.cover') } );
+      return false;
+  });
+
+  $('.cover .edit').click(function() {
+      var id = $(this).data('recordId');
+      var defer = CRUDRelModal.open("編輯橫幅",  "/bs/banner_image/crud/edit", { id: id }, { size: 'large' } );
+      return false;
+  });
+
+  $('.sortable').each(function(i,e) {
+    initSortableAction($(this), {
+      onUpdate: function(resp) {
+        if ( window.console ) {
+          console.log(resp);
+        }
+      }
     });
+  });
 });
 </script>
 {% endblock %}

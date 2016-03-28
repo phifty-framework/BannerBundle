@@ -6,7 +6,7 @@ class ImageSchema extends SchemaDeclare
 {
     public $table = 'banner_images';
 
-    function schema()
+    public function schema()
     {
         $this->column('image')
             ->varchar(256)
@@ -47,14 +47,13 @@ class ImageSchema extends SchemaDeclare
 
         $this->column('category_id')
             ->integer()
+            ->unsigned()
             ->refer('BannerBundle\\Model\\CategorySchema')
             ->renderAs('SelectInput', [ 'allow_empty' => true ])
-            ->label( _('Banner 類別') );
+            ->label(_('橫幅類別'));
 
         $this->mixin('SortablePlugin\\Model\\Mixin\\OrderingSchema');
         $this->mixin('CommonBundle\\Model\\Mixin\\MetaSchema');
-
-        /** self accessor , ( foreign schema, column ) , self column ) **/
         $this->belongsTo('category', 'BannerBundle\\Model\\CategorySchema' , 'id' , 'category_id' );
     }
 }

@@ -32,10 +32,10 @@ class BannerBundle extends Bundle
 
     public function init()
     {
-        $this->expandRoute( '/bs/banner_category' , 'CategoryCRUDHandler' );
-        $this->expandRoute( '/bs/banner_image'    , 'ImageCRUDHandler' );
+        $this->mount( '/bs/banner_category' , 'CategoryCRUDHandler' );
+        $this->mount( '/bs/banner_image'    , 'ImageCRUDHandler' );
 
-        if ( $this->config( 'BannerCategory.enable' ) ) {
+        if ($this->config( 'BannerCategory.enable' )) {
             $this->addRecordAction('Category');
         }
 
