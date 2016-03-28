@@ -31,6 +31,10 @@ $(function() {
       color: #aaa;
       font-weight: bold;
     }
+    .dropzone.fill {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+    }
     .dropzone.dropbox-drag-over {
         border: 1px solid #88bb33;
         background: #cf6;
@@ -123,10 +127,12 @@ $(function() {
             Holder.run({images: $('#previewContainer{{category.id}} img').get(0) });
 
             var $container = $('#previewContainer{{category.id}}');
+            $container.css({ position: 'relative' });
+
             var $dropzone = $container.find('.dropzone');
 
             var $progress = $('<div/>').addClass("upload-progress")
-                $progress.hide().appendTo($container);
+              $progress.hide().css({ position: 'absolute', top: 0, right: 0, zIndex: 99 }).appendTo($container);
 
             var uploader = new FiveKit.DropBoxUploader({ 
                 el: $dropzone,
