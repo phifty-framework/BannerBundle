@@ -292,11 +292,11 @@ class ImageSchemaProxy
           'widgetAttributes' => array( 
               'allow_empty' => true,
             ),
-          'label' => 'Banner 類別',
+          'label' => '橫幅類別',
         ),
       'name' => 'category_id',
       'primary' => NULL,
-      'unsigned' => NULL,
+      'unsigned' => true,
       'type' => 'int',
       'isa' => 'int',
       'notNull' => NULL,
@@ -307,7 +307,7 @@ class ImageSchemaProxy
       'widgetAttributes' => array( 
           'allow_empty' => true,
         ),
-      'label' => 'Banner 類別',
+      'label' => '橫幅類別',
     ));
         $this->columns[ 'ordering' ] = new RuntimeColumn('ordering',array( 
       'locales' => NULL,
