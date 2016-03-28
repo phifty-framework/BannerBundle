@@ -224,6 +224,7 @@ $(function() {
   });
 
   $('.btn-edit-category').click(function() {
+    var btn = this;
     var categoryId = $(this).data('category-id');
     var defer = CRUDRelModal.open("編輯橫幅類別",  "/bs/banner_category/crud/edit", { 'id': categoryId });
     defer.done(function() {
@@ -232,21 +233,25 @@ $(function() {
   });
 
   $('.cover > .remove').click(function() {
-      var id = $(this).data('recordId');
-      runAction( 'BannerBundle::Action::DeleteImage', { id: id }, { confirm: '確認刪除? ', remove: $(this).parents('.cover') } );
-      return false;
+    var id = $(this).data('recordId');
+    runAction( 'BannerBundle::Action::DeleteImage', { id: id }, { confirm: '確認刪除? ', remove: $(this).parents('.cover') } );
+    return false;
   });
 
   $('.cover .edit').click(function() {
-      var id = $(this).data('recordId');
-      var defer = CRUDRelModal.open("編輯橫幅",  "/bs/banner_image/crud/edit", { id: id }, { size: 'large' } );
-      return false;
+    var id = $(this).data('recordId');
+    var btn = this;
+    var defer = CRUDRelModal.open("編輯橫幅",  "/bs/banner_image/crud/edit", { id: id }, { size: 'large' } );
+    defer.done(function() {
+      Region.of(btn).refresh();
+    });
+    return false;
   });
 
   $('.sortable').each(function(i,e) {
     initSortableAction($(this), {
       onUpdate: function(resp) {
-        if ( window.console ) {
+        if (window.console) {
           console.log(resp);
         }
       }
