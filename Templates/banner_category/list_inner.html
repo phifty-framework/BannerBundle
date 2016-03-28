@@ -1,3 +1,6 @@
+{#
+vim:filetype=htmldjango:
+#}
 {% extends "@CRUD/list_inner.html" %}
 {% block list %}
 <script>
@@ -19,21 +22,45 @@ $(function() {
         border-top: 1px solid #ccc;
     }
     .banner-category .category-name {
-        color: #666;
-        font-weight: bold;
-        text-shadow: 0px 0px 2px #ccc;
-        padding: 5px 8px;
-        border-radius: 5px;
+      color: #666;
+      font-weight: bold;
+      padding: 5px 8px;
     }
-    .banner-category .control { float: right; }
     .banner-category .no-data {
-        margin-left: 20px;
-        color: #aaa;
-        font-weight: bold;
+      margin-left: 20px;
+      color: #aaa;
+      font-weight: bold;
     }
     .dropzone.dropbox-drag-over {
         border: 1px solid #88bb33;
         background: #cf6;
+    }
+    .cover {
+      position: relative;
+    }
+    .cover .remove .fa {
+      margin: 0;
+      vertical-align: top;
+      line-height: 2em;
+    }
+    .cover .remove {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      height: 2em;
+      width: 2em;
+      font-size: 1em;
+      line-height: 2em;
+      vertical-align: top;
+      text-align: center;
+      transition: all ease 500ms;
+      background: rgba(255,255,255,0.2);
+    }
+    .cover:hover .remove {
+      background: rgba(255,255,255,0.5);
+    }
+    .cover:hover .remove:hover {
+      background: rgba(255,255,255,1);
     }
 </style>
 
@@ -45,9 +72,7 @@ $(function() {
 {% for category in CRUD.Items %}
 <div class="banner-category">
     <div class="category-name">
-        {{ category.name }} ({{ category.handle }})
-
-        <span class="control">
+        <div class="controls pull-right">
             <button type="button" class="btn btn-primary btn-create-banner" data-category-id="{{category.id}}">新增橫幅</button>
 
             {% if CRUD.Object.canEdit %}
@@ -66,7 +91,10 @@ $(function() {
                     { confirm: '確認刪除? ', remove: $(this).parents('.banner-category') } );" 
                 value="{% trans 'Delete' %}"/>
             {% endif %}
-        </span>
+        </div>
+
+        <h3>{{category.name}}</h3>
+        <kbd>{{category.handle}}</kbd>
     </div>
     <div id="banner-category-images-{{ category.id }}" 
         class="banner-category-images sortable"
@@ -181,16 +209,23 @@ $(function() {
 $(function() {
 
   $('.btn-create-banner').click(function() {
+    var btn = this;
     var categoryId = $(this).data('category-id');
     var defer = CRUDRelModal.open("新增橫幅",  "/bs/banner_image/crud/edit", { 'category_id': categoryId }, { size: 'large' } );
+    defer.done(function() {
+      Region.of(btn).refresh();
+    });
   });
 
   $('.btn-edit-category').click(function() {
     var categoryId = $(this).data('category-id');
     var defer = CRUDRelModal.open("編輯橫幅類別",  "/bs/banner_category/crud/edit", { 'id': categoryId });
+    defer.done(function() {
+      Region.of(btn).refresh();
+    });
   });
 
-  $('.cover > .close').click(function() {
+  $('.cover > .remove').click(function() {
       var id = $(this).data('recordId');
       runAction( 'BannerBundle::Action::DeleteImage', { id: id }, { confirm: '確認刪除? ', remove: $(this).parents('.cover') } );
       return false;

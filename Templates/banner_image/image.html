@@ -1,8 +1,15 @@
+{#
+vim:filetype=htmldjango:
+#}
 <div class="cover large-height pull-left">
+    <div data-record-id="{{item.id}}" class="remove">
+      <i class="fa fa-times"> </i>
+    </div>
+
     <input type="hidden" name="image_id" value="{{ item.id }}"/>
-
-    <a data-lightbox="banner-image-{{item.category_id}}" {% if item.title %}data-title="{{item.title}}"{% endif %} target="_blank" href="/{{ item.image }}"><img src="/{{ item.thumb }}"></a>
-
+    <a data-lightbox="banner-image-{{item.category_id}}" {% if item.title %}data-title="{{item.title}}"{% endif %} target="_blank" href="/{{ item.image }}">
+      <img src="/{{ item.thumb }}" height="80"/>
+    </a>
     {% if item.title %}
     <div class="title">{{ item.title | default('無標題') }} </div>
     {% else %}
@@ -11,5 +18,4 @@
     <div>
         <button data-record-id="{{item.id}}" class="button edit" style=" font-size: 12px; padding:3px 5px;">{% trans  '編輯' %}</button>
     </div>
-    <div data-record-id="{{item.id}}" class="close"> </div>
 </div>
