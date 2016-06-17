@@ -1,5 +1,5 @@
 {
-    "name": "corneltek/bannerbundle",
+    "name": "phifty/bannerbundle",
     "authors": [
         {
             "name": "c9s",
@@ -8,14 +8,11 @@
     ],
     "type": "phifty-bundle",
     "require": {
-      "corneltek/installers": "dev-master"
+      "composer/installers": "~1.0.0"
     },
     "autoload": {
         "psr-4": {
             "BannerBundle\\": ""
         }
-    },
-    "repositories": [
-        {"type": "composer", "url": "https://toran.corneltek.com/repo/private/"}
-    ]
+    }
 }
