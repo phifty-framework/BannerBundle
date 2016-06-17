@@ -133,6 +133,7 @@ class ImageSchemaProxy
       'notNull' => true,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'autoIncrement' => true,
       'renderAs' => 'HiddenInput',
       'widgetAttributes' => array( 
@@ -153,6 +154,7 @@ class ImageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'length' => 256,
       'contentType' => 'ImageFile',
       'label' => '大圖',
@@ -172,6 +174,7 @@ class ImageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'length' => 256,
       'contentType' => 'ImageFile',
       'label' => '縮圖',
@@ -195,6 +198,7 @@ class ImageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'length' => 200,
       'label' => '標題',
       'renderAs' => 'TextInput',
@@ -222,6 +226,7 @@ class ImageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'length' => 512,
       'label' => '副標題',
       'renderAs' => 'TextInput',
@@ -250,6 +255,7 @@ class ImageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'length' => 512,
       'label' => '網址連結',
       'renderAs' => 'TextInput',
@@ -277,6 +283,7 @@ class ImageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'label' => '註解',
       'renderAs' => 'TextareaInput',
       'widgetAttributes' => array( 
@@ -302,6 +309,7 @@ class ImageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'refer' => 'BannerBundle\\Model\\CategorySchema',
       'renderAs' => 'SelectInput',
       'widgetAttributes' => array( 
@@ -326,6 +334,7 @@ class ImageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'default' => 0,
       'renderAs' => 'HiddenInput',
       'widgetAttributes' => array( 
@@ -341,7 +350,7 @@ class ImageSchemaProxy
             ),
           'label' => '建立時間',
           'default' => function() {
-                    return date('c');
+                    return new \DateTime;
                 },
         ),
       'name' => 'created_on',
@@ -352,13 +361,14 @@ class ImageSchemaProxy
       'notNull' => false,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'timezone' => true,
       'renderAs' => 'DateTimeInput',
       'widgetAttributes' => array( 
         ),
       'label' => '建立時間',
       'default' => function() {
-                    return date('c');
+                    return new \DateTime;
                 },
     ));
         $this->columns[ 'updated_on' ] = new RuntimeColumn('updated_on',array( 
@@ -368,9 +378,12 @@ class ImageSchemaProxy
           'renderAs' => 'DateTimeInput',
           'widgetAttributes' => array( 
             ),
-          'default' => function() {
-                    return date('c');
-                },
+          'default' => \SQLBuilder\Raw::__set_state(array( 
+      'value' => 'CURRENT_TIMESTAMP',
+    )),
+          'onUpdate' => \SQLBuilder\Raw::__set_state(array( 
+      'value' => 'CURRENT_TIMESTAMP',
+    )),
           'label' => '更新時間',
         ),
       'name' => 'updated_on',
@@ -381,13 +394,16 @@ class ImageSchemaProxy
       'notNull' => false,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => \SQLBuilder\Raw::__set_state(array( 
+      'value' => 'CURRENT_TIMESTAMP',
+    )),
       'timezone' => true,
       'renderAs' => 'DateTimeInput',
       'widgetAttributes' => array( 
         ),
-      'default' => function() {
-                    return date('c');
-                },
+      'default' => \SQLBuilder\Raw::__set_state(array( 
+      'value' => 'CURRENT_TIMESTAMP',
+    )),
       'label' => '更新時間',
     ));
         $this->columns[ 'created_by' ] = new RuntimeColumn('created_by',array( 
@@ -412,6 +428,7 @@ class ImageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'refer' => 'UserBundle\\Model\\User',
       'default' => function() {
                     if (isset($_SESSION)) {
@@ -445,6 +462,7 @@ class ImageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'refer' => 'UserBundle\\Model\\User',
       'default' => function() {
                     if ( isset($_SESSION) ) {

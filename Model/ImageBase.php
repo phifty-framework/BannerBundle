@@ -10,6 +10,7 @@ use LazyRecord\BaseModel;
 class ImageBase
     extends BaseModel
 {
+    const SCHEMA_CLASS = 'BannerBundle\\Model\\ImageSchema';
     const SCHEMA_PROXY_CLASS = 'BannerBundle\\Model\\ImageSchemaProxy';
     const COLLECTION_CLASS = 'BannerBundle\\Model\\ImageCollection';
     const MODEL_CLASS = 'BannerBundle\\Model\\Image';

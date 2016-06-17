@@ -134,6 +134,7 @@ class CategorySchemaProxy
       'notNull' => true,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'autoIncrement' => true,
       'renderAs' => 'HiddenInput',
       'widgetAttributes' => array( 
@@ -157,6 +158,7 @@ class CategorySchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'length' => 128,
       'label' => '類別名稱',
       'renderAs' => 'TextInput',
@@ -183,6 +185,7 @@ class CategorySchemaProxy
       'notNull' => true,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'length' => 64,
       'required' => true,
       'label' => '程式標記',
@@ -208,6 +211,7 @@ class CategorySchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'length' => 1024,
       'label' => '敘述',
       'renderAs' => 'TextareaInput',
@@ -232,6 +236,7 @@ class CategorySchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'label' => '寬度',
       'renderAs' => 'TextInput',
       'widgetAttributes' => array( 
@@ -257,6 +262,7 @@ class CategorySchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'label' => '高度',
       'renderAs' => 'TextInput',
       'widgetAttributes' => array( 
@@ -280,6 +286,7 @@ class CategorySchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'label' => '備註',
       'renderAs' => 'TextareaInput',
       'widgetAttributes' => array( 
@@ -295,7 +302,7 @@ class CategorySchemaProxy
           'label' => '語言',
           'default' => function() {
                     $bundle = \I18N\I18N::getInstance();
-                    if ( $lang = $bundle->config('default_lang') ) {
+                    if ($lang = $bundle->config('default_lang') ) {
                         return $lang;
                     }
                     return kernel()->locale->getDefault();
@@ -313,6 +320,7 @@ class CategorySchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'length' => 12,
       'validValues' => function() {
                     return array_flip( kernel()->locale->available() );
@@ -320,7 +328,7 @@ class CategorySchemaProxy
       'label' => '語言',
       'default' => function() {
                     $bundle = \I18N\I18N::getInstance();
-                    if ( $lang = $bundle->config('default_lang') ) {
+                    if ($lang = $bundle->config('default_lang') ) {
                         return $lang;
                     }
                     return kernel()->locale->getDefault();
@@ -339,7 +347,7 @@ class CategorySchemaProxy
             ),
           'label' => '建立時間',
           'default' => function() {
-                    return date('c');
+                    return new \DateTime;
                 },
         ),
       'name' => 'created_on',
@@ -350,13 +358,14 @@ class CategorySchemaProxy
       'notNull' => false,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'timezone' => true,
       'renderAs' => 'DateTimeInput',
       'widgetAttributes' => array( 
         ),
       'label' => '建立時間',
       'default' => function() {
-                    return date('c');
+                    return new \DateTime;
                 },
     ));
         $this->columns[ 'updated_on' ] = new RuntimeColumn('updated_on',array( 
@@ -366,9 +375,12 @@ class CategorySchemaProxy
           'renderAs' => 'DateTimeInput',
           'widgetAttributes' => array( 
             ),
-          'default' => function() {
-                    return date('c');
-                },
+          'default' => \SQLBuilder\Raw::__set_state(array( 
+      'value' => 'CURRENT_TIMESTAMP',
+    )),
+          'onUpdate' => \SQLBuilder\Raw::__set_state(array( 
+      'value' => 'CURRENT_TIMESTAMP',
+    )),
           'label' => '更新時間',
         ),
       'name' => 'updated_on',
@@ -379,13 +391,16 @@ class CategorySchemaProxy
       'notNull' => false,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => \SQLBuilder\Raw::__set_state(array( 
+      'value' => 'CURRENT_TIMESTAMP',
+    )),
       'timezone' => true,
       'renderAs' => 'DateTimeInput',
       'widgetAttributes' => array( 
         ),
-      'default' => function() {
-                    return date('c');
-                },
+      'default' => \SQLBuilder\Raw::__set_state(array( 
+      'value' => 'CURRENT_TIMESTAMP',
+    )),
       'label' => '更新時間',
     ));
         $this->columns[ 'created_by' ] = new RuntimeColumn('created_by',array( 
@@ -410,6 +425,7 @@ class CategorySchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'refer' => 'UserBundle\\Model\\User',
       'default' => function() {
                     if (isset($_SESSION)) {
@@ -443,6 +459,7 @@ class CategorySchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'refer' => 'UserBundle\\Model\\User',
       'default' => function() {
                     if ( isset($_SESSION) ) {
