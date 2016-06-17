@@ -8,7 +8,7 @@
     ],
     "type": "phifty-bundle",
     "require": {
-      "composer/installers": "~1.0.0"
+      "composer/installers": "dev-master"
     },
     "autoload": {
         "psr-4": {
