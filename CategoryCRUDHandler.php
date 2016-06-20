@@ -1,9 +1,9 @@
 <?php
 namespace BannerBundle;
+use AdminUI\CRUDHandler;
 
-class CategoryCRUDHandler extends \AdminUI\CRUDHandler
+class CategoryCRUDHandler extends CRUDHandler
 {
-    /* CRUD Attributes */
     public $modelClass = 'BannerBundle\\Model\\Category';
     public $crudId     = 'banner_category';
     public $canEdit    = true;

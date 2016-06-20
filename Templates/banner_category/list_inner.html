@@ -210,10 +210,10 @@ $(function() {
 {% endfor %}
 <div class="clear"> </div>
 
-<script>
+<script type="text/javascript">
+console.log("load something");
 // initialize sortable
 $(function() {
-
   $('.btn-create-banner').click(function() {
     var btn = this;
     var categoryId = $(this).data('category-id');
