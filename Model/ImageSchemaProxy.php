@@ -2,7 +2,7 @@
 namespace BannerBundle\Model;
 use LazyRecord\Schema\RuntimeSchema;
 use LazyRecord\Schema\RuntimeColumn;
-use LazyRecord\Schema\Relationship;
+use LazyRecord\Schema\Relationship\Relationship;
 class ImageSchemaProxy
     extends RuntimeSchema
 {
@@ -71,7 +71,7 @@ class ImageSchemaProxy
     public function __construct()
     {
         $this->relations = array( 
-      'created_by' => \LazyRecord\Schema\Relationship::__set_state(array( 
+      'created_by' => \LazyRecord\Schema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'BannerBundle\\Model\\ImageSchema',
@@ -85,8 +85,9 @@ class ImageSchemaProxy
         ),
       'onUpdate' => NULL,
       'onDelete' => NULL,
+      'usingIndex' => NULL,
     )),
-      'updated_by' => \LazyRecord\Schema\Relationship::__set_state(array( 
+      'updated_by' => \LazyRecord\Schema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'BannerBundle\\Model\\ImageSchema',
@@ -100,8 +101,9 @@ class ImageSchemaProxy
         ),
       'onUpdate' => NULL,
       'onDelete' => NULL,
+      'usingIndex' => NULL,
     )),
-      'category' => \LazyRecord\Schema\Relationship::__set_state(array( 
+      'category' => \LazyRecord\Schema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'BannerBundle\\Model\\ImageSchema',
@@ -115,6 +117,7 @@ class ImageSchemaProxy
         ),
       'onUpdate' => NULL,
       'onDelete' => NULL,
+      'usingIndex' => NULL,
     )),
     );
         $this->columns[ 'id' ] = new RuntimeColumn('id',array( 
@@ -295,6 +298,7 @@ class ImageSchemaProxy
       'locales' => NULL,
       'attributes' => array( 
           'refer' => 'BannerBundle\\Model\\CategorySchema',
+          'length' => NULL,
           'renderAs' => 'SelectInput',
           'widgetAttributes' => array( 
               'allow_empty' => true,
@@ -311,6 +315,7 @@ class ImageSchemaProxy
       'set' => NULL,
       'onUpdate' => NULL,
       'refer' => 'BannerBundle\\Model\\CategorySchema',
+      'length' => NULL,
       'renderAs' => 'SelectInput',
       'widgetAttributes' => array( 
           'allow_empty' => true,
@@ -409,7 +414,8 @@ class ImageSchemaProxy
         $this->columns[ 'created_by' ] = new RuntimeColumn('created_by',array( 
       'locales' => NULL,
       'attributes' => array( 
-          'refer' => 'UserBundle\\Model\\User',
+          'refer' => 'UserBundle\\Model\\UserSchema',
+          'length' => NULL,
           'default' => function() {
                     if (isset($_SESSION)) {
                         return kernel()->currentUser->id;
@@ -429,7 +435,8 @@ class ImageSchemaProxy
       'enum' => NULL,
       'set' => NULL,
       'onUpdate' => NULL,
-      'refer' => 'UserBundle\\Model\\User',
+      'refer' => 'UserBundle\\Model\\UserSchema',
+      'length' => NULL,
       'default' => function() {
                     if (isset($_SESSION)) {
                         return kernel()->currentUser->id;
@@ -443,7 +450,8 @@ class ImageSchemaProxy
         $this->columns[ 'updated_by' ] = new RuntimeColumn('updated_by',array( 
       'locales' => NULL,
       'attributes' => array( 
-          'refer' => 'UserBundle\\Model\\User',
+          'refer' => 'UserBundle\\Model\\UserSchema',
+          'length' => NULL,
           'default' => function() {
                     if ( isset($_SESSION) ) {
                         return kernel()->currentUser->id;
@@ -463,7 +471,8 @@ class ImageSchemaProxy
       'enum' => NULL,
       'set' => NULL,
       'onUpdate' => NULL,
-      'refer' => 'UserBundle\\Model\\User',
+      'refer' => 'UserBundle\\Model\\UserSchema',
+      'length' => NULL,
       'default' => function() {
                     if ( isset($_SESSION) ) {
                         return kernel()->currentUser->id;

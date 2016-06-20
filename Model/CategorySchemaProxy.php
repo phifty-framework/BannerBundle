@@ -2,7 +2,7 @@
 namespace BannerBundle\Model;
 use LazyRecord\Schema\RuntimeSchema;
 use LazyRecord\Schema\RuntimeColumn;
-use LazyRecord\Schema\Relationship;
+use LazyRecord\Schema\Relationship\Relationship;
 class CategorySchemaProxy
     extends RuntimeSchema
 {
@@ -68,7 +68,7 @@ class CategorySchemaProxy
     public function __construct()
     {
         $this->relations = array( 
-      'created_by' => \LazyRecord\Schema\Relationship::__set_state(array( 
+      'created_by' => \LazyRecord\Schema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'BannerBundle\\Model\\CategorySchema',
@@ -82,8 +82,9 @@ class CategorySchemaProxy
         ),
       'onUpdate' => NULL,
       'onDelete' => NULL,
+      'usingIndex' => NULL,
     )),
-      'updated_by' => \LazyRecord\Schema\Relationship::__set_state(array( 
+      'updated_by' => \LazyRecord\Schema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'BannerBundle\\Model\\CategorySchema',
@@ -97,14 +98,15 @@ class CategorySchemaProxy
         ),
       'onUpdate' => NULL,
       'onDelete' => NULL,
+      'usingIndex' => NULL,
     )),
-      'images' => \LazyRecord\Schema\Relationship::__set_state(array( 
+      'images' => \LazyRecord\Schema\Relationship\HasMany::__set_state(array( 
       'data' => array( 
           'type' => 1,
-          'self_column' => 'id',
           'self_schema' => 'BannerBundle\\Model\\CategorySchema',
-          'foreign_column' => 'category_id',
+          'self_column' => 'id',
           'foreign_schema' => 'BannerBundle\\Model\\ImageSchema',
+          'foreign_column' => 'category_id',
         ),
       'accessor' => 'images',
       'where' => NULL,
@@ -116,6 +118,7 @@ class CategorySchemaProxy
         ),
       'onUpdate' => NULL,
       'onDelete' => NULL,
+      'usingIndex' => NULL,
     )),
     );
         $this->columns[ 'id' ] = new RuntimeColumn('id',array( 
@@ -406,7 +409,8 @@ class CategorySchemaProxy
         $this->columns[ 'created_by' ] = new RuntimeColumn('created_by',array( 
       'locales' => NULL,
       'attributes' => array( 
-          'refer' => 'UserBundle\\Model\\User',
+          'refer' => 'UserBundle\\Model\\UserSchema',
+          'length' => NULL,
           'default' => function() {
                     if (isset($_SESSION)) {
                         return kernel()->currentUser->id;
@@ -426,7 +430,8 @@ class CategorySchemaProxy
       'enum' => NULL,
       'set' => NULL,
       'onUpdate' => NULL,
-      'refer' => 'UserBundle\\Model\\User',
+      'refer' => 'UserBundle\\Model\\UserSchema',
+      'length' => NULL,
       'default' => function() {
                     if (isset($_SESSION)) {
                         return kernel()->currentUser->id;
@@ -440,7 +445,8 @@ class CategorySchemaProxy
         $this->columns[ 'updated_by' ] = new RuntimeColumn('updated_by',array( 
       'locales' => NULL,
       'attributes' => array( 
-          'refer' => 'UserBundle\\Model\\User',
+          'refer' => 'UserBundle\\Model\\UserSchema',
+          'length' => NULL,
           'default' => function() {
                     if ( isset($_SESSION) ) {
                         return kernel()->currentUser->id;
@@ -460,7 +466,8 @@ class CategorySchemaProxy
       'enum' => NULL,
       'set' => NULL,
       'onUpdate' => NULL,
-      'refer' => 'UserBundle\\Model\\User',
+      'refer' => 'UserBundle\\Model\\UserSchema',
+      'length' => NULL,
       'default' => function() {
                     if ( isset($_SESSION) ) {
                         return kernel()->currentUser->id;
