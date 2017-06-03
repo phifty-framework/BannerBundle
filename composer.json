@@ -8,7 +8,22 @@
     ],
     "type": "phifty-bundle",
     "require": {
-      "composer/installers": "dev-master"
+        "composer/installers": "^1",
+        "phifty/phifty": "4.0.x-dev"
+    },
+    "require-dev": {
+        "corneltek/cliframework": "@dev",
+        "corneltek/actionkit": "@dev",
+        "corneltek/assetkit": "@dev",
+        "corneltek/codegen": "@dev",
+        "corneltek/kendo": "@dev",
+        "corneltek/pux": "@dev",
+        "phpsgi/phpsgi": "@dev",
+        "phpsgi/funk": "@dev",
+        "maghead/maghead": "@dev",
+        "maghead/magsql": "@dev",
+        "phifty/adminui": "4.0.x-dev",
+        "phifty/userbundle": "4.0.x-dev"
     },
     "autoload": {
         "psr-4": {
@@ -16,6 +31,6 @@
         }
     },
     "extra": {
-        "branch-alias": { "dev-master": "3.1.x-dev" }
+        "branch-alias": { "dev-master": "4.0.x-dev" }
     }
 }
