@@ -1,19 +1,38 @@
 <?php
+
 namespace BannerBundle\Model;
-use Maghead\Schema\DeclareSchema\RuntimeSchema;
-use Maghead\Schema\DeclareSchema\RuntimeColumn;
-use Maghead\Schema\DeclareSchema\Relationship\Relationship;
+
+
+use Maghead\Schema\RuntimeSchema;
+use Maghead\Schema\RuntimeColumn;
+use Maghead\Schema\Relationship\Relationship;
+
 class CategorySchemaProxy
     extends RuntimeSchema
 {
-    const schema_class = 'BannerBundle\\Model\\CategorySchema';
-    const model_name = 'Category';
-    const model_namespace = 'BannerBundle\\Model';
-    const COLLECTION_CLASS = 'BannerBundle\\Model\\CategoryCollection';
-    const MODEL_CLASS = 'BannerBundle\\Model\\Category';
-    const PRIMARY_KEY = 'id';
-    const TABLE = 'banner_categories';
+
+    const SCHEMA_CLASS = 'BannerBundle\\Model\\CategorySchema';
+
     const LABEL = 'Category';
+
+    const MODEL_NAME = 'Category';
+
+    const MODEL_NAMESPACE = 'BannerBundle\\Model';
+
+    const MODEL_CLASS = 'BannerBundle\\Model\\Category';
+
+    const REPO_CLASS = 'BannerBundle\\Model\\CategoryRepoBase';
+
+    const COLLECTION_CLASS = 'BannerBundle\\Model\\CategoryCollection';
+
+    const TABLE = 'banner_categories';
+
+    const PRIMARY_KEY = 'id';
+
+    const GLOBAL_PRIMARY_KEY = NULL;
+
+    const LOCAL_PRIMARY_KEY = 'id';
+
     public static $column_hash = array (
       'id' => 1,
       'name' => 1,
@@ -28,10 +47,12 @@ class CategorySchemaProxy
       'created_by' => 1,
       'updated_by' => 1,
     );
+
     public static $mixin_classes = array (
       0 => 'CommonBundle\\Model\\Mixin\\MetaSchema',
       1 => 'I18N\\Model\\Mixin\\I18NSchema',
     );
+
     public $columnNames = array (
       0 => 'id',
       1 => 'name',
@@ -46,7 +67,9 @@ class CategorySchemaProxy
       10 => 'created_by',
       11 => 'updated_by',
     );
+
     public $primaryKey = 'id';
+
     public $columnNamesIncludeVirtual = array (
       0 => 'id',
       1 => 'name',
@@ -61,14 +84,19 @@ class CategorySchemaProxy
       10 => 'created_by',
       11 => 'updated_by',
     );
+
     public $label = 'Category';
-    public $readSourceId = 'default';
-    public $writeSourceId = 'default';
+
+    public $readSourceId = 'master';
+
+    public $writeSourceId = 'master';
+
     public $relations;
+
     public function __construct()
     {
         $this->relations = array( 
-      'created_by' => \Maghead\Schema\DeclareSchema\Relationship\BelongsTo::__set_state(array( 
+      'created_by' => \Maghead\Schema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'BannerBundle\\Model\\CategorySchema',
@@ -82,9 +110,9 @@ class CategorySchemaProxy
         ),
       'onUpdate' => NULL,
       'onDelete' => NULL,
-      'usingIndex' => NULL,
+      'usingIndex' => false,
     )),
-      'updated_by' => \Maghead\Schema\DeclareSchema\Relationship\BelongsTo::__set_state(array( 
+      'updated_by' => \Maghead\Schema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'BannerBundle\\Model\\CategorySchema',
@@ -98,9 +126,9 @@ class CategorySchemaProxy
         ),
       'onUpdate' => NULL,
       'onDelete' => NULL,
-      'usingIndex' => NULL,
+      'usingIndex' => false,
     )),
-      'images' => \Maghead\Schema\DeclareSchema\Relationship\HasMany::__set_state(array( 
+      'images' => \Maghead\Schema\Relationship\HasMany::__set_state(array( 
       'data' => array( 
           'type' => 1,
           'self_schema' => 'BannerBundle\\Model\\CategorySchema',
@@ -201,7 +229,7 @@ class CategorySchemaProxy
       'locales' => NULL,
       'attributes' => array( 
           'length' => 1024,
-          'label' => '敘述',
+          'label' => 'Description',
           'renderAs' => 'TextareaInput',
           'widgetAttributes' => array( 
             ),
@@ -216,7 +244,7 @@ class CategorySchemaProxy
       'set' => NULL,
       'onUpdate' => NULL,
       'length' => 1024,
-      'label' => '敘述',
+      'label' => 'Description',
       'renderAs' => 'TextareaInput',
       'widgetAttributes' => array( 
         ),
@@ -300,7 +328,7 @@ class CategorySchemaProxy
       'attributes' => array( 
           'length' => 12,
           'validValues' => function() {
-                    return array_flip( kernel()->locale->available() );
+                    return array_flip(kernel()->locale->available());
                 },
           'label' => '語言',
           'default' => function() {
@@ -326,7 +354,7 @@ class CategorySchemaProxy
       'onUpdate' => NULL,
       'length' => 12,
       'validValues' => function() {
-                    return array_flip( kernel()->locale->available() );
+                    return array_flip(kernel()->locale->available());
                 },
       'label' => '語言',
       'default' => function() {
@@ -378,10 +406,10 @@ class CategorySchemaProxy
           'renderAs' => 'DateTimeInput',
           'widgetAttributes' => array( 
             ),
-          'default' => \SQLBuilder\Raw::__set_state(array( 
+          'default' => \Magsql\Raw::__set_state(array( 
       'value' => 'CURRENT_TIMESTAMP',
     )),
-          'onUpdate' => \SQLBuilder\Raw::__set_state(array( 
+          'onUpdate' => \Magsql\Raw::__set_state(array( 
       'value' => 'CURRENT_TIMESTAMP',
     )),
           'label' => '更新時間',
@@ -394,14 +422,14 @@ class CategorySchemaProxy
       'notNull' => false,
       'enum' => NULL,
       'set' => NULL,
-      'onUpdate' => \SQLBuilder\Raw::__set_state(array( 
+      'onUpdate' => \Magsql\Raw::__set_state(array( 
       'value' => 'CURRENT_TIMESTAMP',
     )),
       'timezone' => true,
       'renderAs' => 'DateTimeInput',
       'widgetAttributes' => array( 
         ),
-      'default' => \SQLBuilder\Raw::__set_state(array( 
+      'default' => \Magsql\Raw::__set_state(array( 
       'value' => 'CURRENT_TIMESTAMP',
     )),
       'label' => '更新時間',

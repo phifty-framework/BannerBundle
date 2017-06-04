@@ -1,5 +1,7 @@
 <?php
+
 namespace BannerBundle\Model;
+
 use Maghead\Schema\DeclareSchema;
 
 class ImageSchema extends DeclareSchema
@@ -52,8 +54,8 @@ class ImageSchema extends DeclareSchema
             ->renderAs('SelectInput', [ 'allow_empty' => true ])
             ->label(_('橫幅類別'));
 
-        $this->mixin('SortablePlugin\\Model\\Mixin\\OrderingSchema');
-        $this->mixin('CommonBundle\\Model\\Mixin\\MetaSchema');
+        $this->mixin(\CommonBundle\Model\Mixin\OrderingSchema::class);
+        $this->mixin(\CommonBundle\Model\Mixin\MetaSchema::class);
         $this->belongsTo('category', 'BannerBundle\\Model\\CategorySchema' , 'id' , 'category_id' );
     }
 }

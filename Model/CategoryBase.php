@@ -1,24 +1,50 @@
 <?php
+
 namespace BannerBundle\Model;
-use Maghead\Schema\DeclareSchema\SchemaLoader;
-use Maghead\Result;
-use SQLBuilder\Bind;
-use SQLBuilder\ArgumentArray;
-use PDO;
-use SQLBuilder\Universal\Query\InsertQuery;
+
+
 use Maghead\Runtime\Model;
+use Maghead\Schema\SchemaLoader;
+use Maghead\Runtime\Result;
+use Maghead\Runtime\Inflator;
+use Magsql\Bind;
+use Magsql\ArgumentArray;
+use DateTime;
+
 class CategoryBase
     extends Model
 {
-    const SCHEMA_CLASS = 'BannerBundle\\Model\\CategorySchema';
+
     const SCHEMA_PROXY_CLASS = 'BannerBundle\\Model\\CategorySchemaProxy';
-    const COLLECTION_CLASS = 'BannerBundle\\Model\\CategoryCollection';
+
+    const READ_SOURCE_ID = 'master';
+
+    const WRITE_SOURCE_ID = 'master';
+
+    const TABLE_ALIAS = 'm';
+
+    const SCHEMA_CLASS = 'BannerBundle\\Model\\CategorySchema';
+
+    const LABEL = 'Category';
+
+    const MODEL_NAME = 'Category';
+
+    const MODEL_NAMESPACE = 'BannerBundle\\Model';
+
     const MODEL_CLASS = 'BannerBundle\\Model\\Category';
+
+    const REPO_CLASS = 'BannerBundle\\Model\\CategoryRepoBase';
+
+    const COLLECTION_CLASS = 'BannerBundle\\Model\\CategoryCollection';
+
     const TABLE = 'banner_categories';
-    const READ_SOURCE_ID = 'default';
-    const WRITE_SOURCE_ID = 'default';
+
     const PRIMARY_KEY = 'id';
-    const FIND_BY_PRIMARY_KEY_SQL = 'SELECT * FROM banner_categories WHERE id = :id LIMIT 1';
+
+    const GLOBAL_PRIMARY_KEY = NULL;
+
+    const LOCAL_PRIMARY_KEY = 'id';
+
     public static $column_names = array (
       0 => 'id',
       1 => 'name',
@@ -33,80 +59,199 @@ class CategoryBase
       10 => 'created_by',
       11 => 'updated_by',
     );
-    public static $column_hash = array (
-      'id' => 1,
-      'name' => 1,
-      'handle' => 1,
-      'description' => 1,
-      'width' => 1,
-      'height' => 1,
-      'remark' => 1,
-      'lang' => 1,
-      'created_on' => 1,
-      'updated_on' => 1,
-      'created_by' => 1,
-      'updated_by' => 1,
-    );
+
     public static $mixin_classes = array (
       0 => 'CommonBundle\\Model\\Mixin\\MetaSchema',
       1 => 'I18N\\Model\\Mixin\\I18NSchema',
     );
+
     protected $table = 'banner_categories';
-    public $readSourceId = 'default';
-    public $writeSourceId = 'default';
-    public function getSchema()
+
+    public $id;
+
+    public $name;
+
+    public $handle;
+
+    public $description;
+
+    public $width;
+
+    public $height;
+
+    public $remark;
+
+    public $lang;
+
+    public $created_on;
+
+    public $updated_on;
+
+    public $created_by;
+
+    public $updated_by;
+
+    public static function getSchema()
     {
-        if ($this->_schema) {
-           return $this->_schema;
+        static $schema;
+        if ($schema) {
+           return $schema;
         }
-        return $this->_schema = SchemaLoader::load('BannerBundle\\Model\\CategorySchemaProxy');
+        return $schema = new \BannerBundle\Model\CategorySchemaProxy;
     }
+
+    public static function createRepo($write, $read)
+    {
+        return new \BannerBundle\Model\CategoryRepoBase($write, $read);
+    }
+
+    public function getKeyName()
+    {
+        return 'id';
+    }
+
+    public function getKey()
+    {
+        return $this->id;
+    }
+
+    public function hasKey()
+    {
+        return isset($this->id);
+    }
+
+    public function setKey($key)
+    {
+        return $this->id = $key;
+    }
+
+    public function removeLocalPrimaryKey()
+    {
+        $this->id = null;
+    }
+
     public function getId()
     {
-            return $this->get('id');
+        return intval($this->id);
     }
+
     public function getName()
     {
-            return $this->get('name');
+        return $this->name;
     }
+
     public function getHandle()
     {
-            return $this->get('handle');
+        return $this->handle;
     }
+
     public function getDescription()
     {
-            return $this->get('description');
+        return $this->description;
     }
+
     public function getWidth()
     {
-            return $this->get('width');
+        return intval($this->width);
     }
+
     public function getHeight()
     {
-            return $this->get('height');
+        return intval($this->height);
     }
+
     public function getRemark()
     {
-            return $this->get('remark');
+        return $this->remark;
     }
+
     public function getLang()
     {
-            return $this->get('lang');
+        return $this->lang;
     }
+
     public function getCreatedOn()
     {
-            return $this->get('created_on');
+        return Inflator::inflate($this->created_on, 'DateTime');
     }
+
     public function getUpdatedOn()
     {
-            return $this->get('updated_on');
+        return Inflator::inflate($this->updated_on, 'DateTime');
     }
+
     public function getCreatedBy()
     {
-            return $this->get('created_by');
+        return intval($this->created_by);
     }
+
     public function getUpdatedBy()
     {
-            return $this->get('updated_by');
+        return intval($this->updated_by);
+    }
+
+    public function getAlterableData()
+    {
+        return ["id" => $this->id, "name" => $this->name, "handle" => $this->handle, "description" => $this->description, "width" => $this->width, "height" => $this->height, "remark" => $this->remark, "lang" => $this->lang, "created_on" => $this->created_on, "updated_on" => $this->updated_on, "created_by" => $this->created_by, "updated_by" => $this->updated_by];
+    }
+
+    public function getData()
+    {
+        return ["id" => $this->id, "name" => $this->name, "handle" => $this->handle, "description" => $this->description, "width" => $this->width, "height" => $this->height, "remark" => $this->remark, "lang" => $this->lang, "created_on" => $this->created_on, "updated_on" => $this->updated_on, "created_by" => $this->created_by, "updated_by" => $this->updated_by];
+    }
+
+    public function setData(array $data)
+    {
+        if (array_key_exists("id", $data)) { $this->id = $data["id"]; }
+        if (array_key_exists("name", $data)) { $this->name = $data["name"]; }
+        if (array_key_exists("handle", $data)) { $this->handle = $data["handle"]; }
+        if (array_key_exists("description", $data)) { $this->description = $data["description"]; }
+        if (array_key_exists("width", $data)) { $this->width = $data["width"]; }
+        if (array_key_exists("height", $data)) { $this->height = $data["height"]; }
+        if (array_key_exists("remark", $data)) { $this->remark = $data["remark"]; }
+        if (array_key_exists("lang", $data)) { $this->lang = $data["lang"]; }
+        if (array_key_exists("created_on", $data)) { $this->created_on = $data["created_on"]; }
+        if (array_key_exists("updated_on", $data)) { $this->updated_on = $data["updated_on"]; }
+        if (array_key_exists("created_by", $data)) { $this->created_by = $data["created_by"]; }
+        if (array_key_exists("updated_by", $data)) { $this->updated_by = $data["updated_by"]; }
+    }
+
+    public function clear()
+    {
+        $this->id = NULL;
+        $this->name = NULL;
+        $this->handle = NULL;
+        $this->description = NULL;
+        $this->width = NULL;
+        $this->height = NULL;
+        $this->remark = NULL;
+        $this->lang = NULL;
+        $this->created_on = NULL;
+        $this->updated_on = NULL;
+        $this->created_by = NULL;
+        $this->updated_by = NULL;
+    }
+
+    public function fetchCreatedBy()
+    {
+        return static::masterRepo()->fetchCreatedByOf($this);
+    }
+
+    public function fetchUpdatedBy()
+    {
+        return static::masterRepo()->fetchUpdatedByOf($this);
+    }
+
+    public function fetchImages()
+    {
+        return static::masterRepo()->fetchImagesOf($this);
+    }
+
+    public function getImages()
+    {
+        $collection = new \BannerBundle\Model\ImageCollection;
+        $collection->where()->equal("category_id", $this->id);
+        $collection->setPresetVars([ "category_id" => $this->id ]);
+        return $collection;
     }
 }

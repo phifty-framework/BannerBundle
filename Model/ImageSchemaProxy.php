@@ -1,19 +1,38 @@
 <?php
+
 namespace BannerBundle\Model;
-use Maghead\Schema\DeclareSchema\RuntimeSchema;
-use Maghead\Schema\DeclareSchema\RuntimeColumn;
-use Maghead\Schema\DeclareSchema\Relationship\Relationship;
+
+
+use Maghead\Schema\RuntimeSchema;
+use Maghead\Schema\RuntimeColumn;
+use Maghead\Schema\Relationship\Relationship;
+
 class ImageSchemaProxy
     extends RuntimeSchema
 {
-    const schema_class = 'BannerBundle\\Model\\ImageSchema';
-    const model_name = 'Image';
-    const model_namespace = 'BannerBundle\\Model';
-    const COLLECTION_CLASS = 'BannerBundle\\Model\\ImageCollection';
-    const MODEL_CLASS = 'BannerBundle\\Model\\Image';
-    const PRIMARY_KEY = 'id';
-    const TABLE = 'banner_images';
+
+    const SCHEMA_CLASS = 'BannerBundle\\Model\\ImageSchema';
+
     const LABEL = 'Image';
+
+    const MODEL_NAME = 'Image';
+
+    const MODEL_NAMESPACE = 'BannerBundle\\Model';
+
+    const MODEL_CLASS = 'BannerBundle\\Model\\Image';
+
+    const REPO_CLASS = 'BannerBundle\\Model\\ImageRepoBase';
+
+    const COLLECTION_CLASS = 'BannerBundle\\Model\\ImageCollection';
+
+    const TABLE = 'banner_images';
+
+    const PRIMARY_KEY = 'id';
+
+    const GLOBAL_PRIMARY_KEY = NULL;
+
+    const LOCAL_PRIMARY_KEY = 'id';
+
     public static $column_hash = array (
       'id' => 1,
       'image' => 1,
@@ -29,10 +48,12 @@ class ImageSchemaProxy
       'created_by' => 1,
       'updated_by' => 1,
     );
+
     public static $mixin_classes = array (
       0 => 'CommonBundle\\Model\\Mixin\\MetaSchema',
-      1 => 'SortablePlugin\\Model\\Mixin\\OrderingSchema',
+      1 => 'CommonBundle\\Model\\Mixin\\OrderingSchema',
     );
+
     public $columnNames = array (
       0 => 'id',
       1 => 'image',
@@ -48,7 +69,9 @@ class ImageSchemaProxy
       11 => 'created_by',
       12 => 'updated_by',
     );
+
     public $primaryKey = 'id';
+
     public $columnNamesIncludeVirtual = array (
       0 => 'id',
       1 => 'image',
@@ -64,14 +87,19 @@ class ImageSchemaProxy
       11 => 'created_by',
       12 => 'updated_by',
     );
+
     public $label = 'Image';
-    public $readSourceId = 'default';
-    public $writeSourceId = 'default';
+
+    public $readSourceId = 'master';
+
+    public $writeSourceId = 'master';
+
     public $relations;
+
     public function __construct()
     {
         $this->relations = array( 
-      'created_by' => \Maghead\Schema\DeclareSchema\Relationship\BelongsTo::__set_state(array( 
+      'created_by' => \Maghead\Schema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'BannerBundle\\Model\\ImageSchema',
@@ -85,9 +113,9 @@ class ImageSchemaProxy
         ),
       'onUpdate' => NULL,
       'onDelete' => NULL,
-      'usingIndex' => NULL,
+      'usingIndex' => false,
     )),
-      'updated_by' => \Maghead\Schema\DeclareSchema\Relationship\BelongsTo::__set_state(array( 
+      'updated_by' => \Maghead\Schema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'BannerBundle\\Model\\ImageSchema',
@@ -101,9 +129,9 @@ class ImageSchemaProxy
         ),
       'onUpdate' => NULL,
       'onDelete' => NULL,
-      'usingIndex' => NULL,
+      'usingIndex' => false,
     )),
-      'category' => \Maghead\Schema\DeclareSchema\Relationship\BelongsTo::__set_state(array( 
+      'category' => \Maghead\Schema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'BannerBundle\\Model\\ImageSchema',
@@ -186,7 +214,7 @@ class ImageSchemaProxy
       'locales' => NULL,
       'attributes' => array( 
           'length' => 200,
-          'label' => '標題',
+          'label' => 'Title',
           'renderAs' => 'TextInput',
           'widgetAttributes' => array( 
               'size' => 50,
@@ -203,7 +231,7 @@ class ImageSchemaProxy
       'set' => NULL,
       'onUpdate' => NULL,
       'length' => 200,
-      'label' => '標題',
+      'label' => 'Title',
       'renderAs' => 'TextInput',
       'widgetAttributes' => array( 
           'size' => 50,
@@ -214,7 +242,7 @@ class ImageSchemaProxy
       'locales' => NULL,
       'attributes' => array( 
           'length' => 512,
-          'label' => '副標題',
+          'label' => 'Subtitle',
           'renderAs' => 'TextInput',
           'widgetAttributes' => array( 
               'size' => 60,
@@ -231,7 +259,7 @@ class ImageSchemaProxy
       'set' => NULL,
       'onUpdate' => NULL,
       'length' => 512,
-      'label' => '副標題',
+      'label' => 'Subtitle',
       'renderAs' => 'TextInput',
       'widgetAttributes' => array( 
           'size' => 60,
@@ -383,10 +411,10 @@ class ImageSchemaProxy
           'renderAs' => 'DateTimeInput',
           'widgetAttributes' => array( 
             ),
-          'default' => \SQLBuilder\Raw::__set_state(array( 
+          'default' => \Magsql\Raw::__set_state(array( 
       'value' => 'CURRENT_TIMESTAMP',
     )),
-          'onUpdate' => \SQLBuilder\Raw::__set_state(array( 
+          'onUpdate' => \Magsql\Raw::__set_state(array( 
       'value' => 'CURRENT_TIMESTAMP',
     )),
           'label' => '更新時間',
@@ -399,14 +427,14 @@ class ImageSchemaProxy
       'notNull' => false,
       'enum' => NULL,
       'set' => NULL,
-      'onUpdate' => \SQLBuilder\Raw::__set_state(array( 
+      'onUpdate' => \Magsql\Raw::__set_state(array( 
       'value' => 'CURRENT_TIMESTAMP',
     )),
       'timezone' => true,
       'renderAs' => 'DateTimeInput',
       'widgetAttributes' => array( 
         ),
-      'default' => \SQLBuilder\Raw::__set_state(array( 
+      'default' => \Magsql\Raw::__set_state(array( 
       'value' => 'CURRENT_TIMESTAMP',
     )),
       'label' => '更新時間',
