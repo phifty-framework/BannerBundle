@@ -1,8 +1,8 @@
 <?php
 namespace BannerBundle\Model;
-use LazyRecord\Schema\SchemaDeclare;
+use Maghead\Schema\DeclareSchema;
 
-class CategorySchema extends SchemaDeclare
+class CategorySchema extends DeclareSchema
 {
     public function schema()
     {

@@ -1,8 +1,8 @@
 <?php
 namespace BannerBundle\Model;
-use LazyRecord\Schema\RuntimeSchema;
-use LazyRecord\Schema\RuntimeColumn;
-use LazyRecord\Schema\Relationship\Relationship;
+use Maghead\Schema\DeclareSchema\RuntimeSchema;
+use Maghead\Schema\DeclareSchema\RuntimeColumn;
+use Maghead\Schema\DeclareSchema\Relationship\Relationship;
 class CategorySchemaProxy
     extends RuntimeSchema
 {
@@ -68,7 +68,7 @@ class CategorySchemaProxy
     public function __construct()
     {
         $this->relations = array( 
-      'created_by' => \LazyRecord\Schema\Relationship\BelongsTo::__set_state(array( 
+      'created_by' => \Maghead\Schema\DeclareSchema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'BannerBundle\\Model\\CategorySchema',
@@ -84,7 +84,7 @@ class CategorySchemaProxy
       'onDelete' => NULL,
       'usingIndex' => NULL,
     )),
-      'updated_by' => \LazyRecord\Schema\Relationship\BelongsTo::__set_state(array( 
+      'updated_by' => \Maghead\Schema\DeclareSchema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'BannerBundle\\Model\\CategorySchema',
@@ -100,7 +100,7 @@ class CategorySchemaProxy
       'onDelete' => NULL,
       'usingIndex' => NULL,
     )),
-      'images' => \LazyRecord\Schema\Relationship\HasMany::__set_state(array( 
+      'images' => \Maghead\Schema\DeclareSchema\Relationship\HasMany::__set_state(array( 
       'data' => array( 
           'type' => 1,
           'self_schema' => 'BannerBundle\\Model\\CategorySchema',

@@ -1,8 +1,8 @@
 <?php
 namespace BannerBundle\Model;
-use LazyRecord\Schema\SchemaDeclare;
+use Maghead\Schema\DeclareSchema;
 
-class ImageSchema extends SchemaDeclare
+class ImageSchema extends DeclareSchema
 {
     public $table = 'banner_images';
 

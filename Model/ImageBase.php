@@ -1,14 +1,14 @@
 <?php
 namespace BannerBundle\Model;
-use LazyRecord\Schema\SchemaLoader;
-use LazyRecord\Result;
+use Maghead\Schema\DeclareSchema\SchemaLoader;
+use Maghead\Result;
 use SQLBuilder\Bind;
 use SQLBuilder\ArgumentArray;
 use PDO;
 use SQLBuilder\Universal\Query\InsertQuery;
-use LazyRecord\BaseModel;
+use Maghead\Runtime\Model;
 class ImageBase
-    extends BaseModel
+    extends Model
 {
     const SCHEMA_CLASS = 'BannerBundle\\Model\\ImageSchema';
     const SCHEMA_PROXY_CLASS = 'BannerBundle\\Model\\ImageSchemaProxy';

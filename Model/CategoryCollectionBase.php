@@ -1,8 +1,8 @@
 <?php
 namespace BannerBundle\Model;
-use LazyRecord\BaseCollection;
+use Maghead\Runtime\Collection;
 class CategoryCollectionBase
-    extends BaseCollection
+    extends Collection
 {
     const SCHEMA_PROXY_CLASS = 'BannerBundle\\Model\\CategorySchemaProxy';
     const MODEL_CLASS = 'BannerBundle\\Model\\Category';
