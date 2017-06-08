@@ -10,10 +10,13 @@ use Maghead\Runtime\Inflator;
 use Magsql\Bind;
 use Magsql\ArgumentArray;
 use DateTime;
+use Maghead\Runtime\ActionCreatorTrait;
 
 class CategoryBase
     extends Model
 {
+
+    use ActionCreatorTrait;
 
     const SCHEMA_PROXY_CLASS = 'BannerBundle\\Model\\CategorySchemaProxy';
 
@@ -54,10 +57,10 @@ class CategoryBase
       5 => 'height',
       6 => 'remark',
       7 => 'lang',
-      8 => 'created_on',
-      9 => 'updated_on',
-      10 => 'created_by',
-      11 => 'updated_by',
+      8 => 'updated_on',
+      9 => 'created_on',
+      10 => 'updated_by',
+      11 => 'created_by',
     );
 
     public static $mixin_classes = array (
@@ -83,13 +86,13 @@ class CategoryBase
 
     public $lang;
 
-    public $created_on;
-
     public $updated_on;
 
-    public $created_by;
+    public $created_on;
 
     public $updated_by;
+
+    public $created_by;
 
     public static function getSchema()
     {
@@ -170,19 +173,14 @@ class CategoryBase
         return $this->lang;
     }
 
-    public function getCreatedOn()
-    {
-        return Inflator::inflate($this->created_on, 'DateTime');
-    }
-
     public function getUpdatedOn()
     {
         return Inflator::inflate($this->updated_on, 'DateTime');
     }
 
-    public function getCreatedBy()
+    public function getCreatedOn()
     {
-        return intval($this->created_by);
+        return Inflator::inflate($this->created_on, 'DateTime');
     }
 
     public function getUpdatedBy()
@@ -190,14 +188,19 @@ class CategoryBase
         return intval($this->updated_by);
     }
 
+    public function getCreatedBy()
+    {
+        return intval($this->created_by);
+    }
+
     public function getAlterableData()
     {
-        return ["id" => $this->id, "name" => $this->name, "handle" => $this->handle, "description" => $this->description, "width" => $this->width, "height" => $this->height, "remark" => $this->remark, "lang" => $this->lang, "created_on" => $this->created_on, "updated_on" => $this->updated_on, "created_by" => $this->created_by, "updated_by" => $this->updated_by];
+        return ["id" => $this->id, "name" => $this->name, "handle" => $this->handle, "description" => $this->description, "width" => $this->width, "height" => $this->height, "remark" => $this->remark, "lang" => $this->lang, "updated_on" => $this->updated_on, "created_on" => $this->created_on, "updated_by" => $this->updated_by, "created_by" => $this->created_by];
     }
 
     public function getData()
     {
-        return ["id" => $this->id, "name" => $this->name, "handle" => $this->handle, "description" => $this->description, "width" => $this->width, "height" => $this->height, "remark" => $this->remark, "lang" => $this->lang, "created_on" => $this->created_on, "updated_on" => $this->updated_on, "created_by" => $this->created_by, "updated_by" => $this->updated_by];
+        return ["id" => $this->id, "name" => $this->name, "handle" => $this->handle, "description" => $this->description, "width" => $this->width, "height" => $this->height, "remark" => $this->remark, "lang" => $this->lang, "updated_on" => $this->updated_on, "created_on" => $this->created_on, "updated_by" => $this->updated_by, "created_by" => $this->created_by];
     }
 
     public function setData(array $data)
@@ -210,10 +213,10 @@ class CategoryBase
         if (array_key_exists("height", $data)) { $this->height = $data["height"]; }
         if (array_key_exists("remark", $data)) { $this->remark = $data["remark"]; }
         if (array_key_exists("lang", $data)) { $this->lang = $data["lang"]; }
-        if (array_key_exists("created_on", $data)) { $this->created_on = $data["created_on"]; }
         if (array_key_exists("updated_on", $data)) { $this->updated_on = $data["updated_on"]; }
-        if (array_key_exists("created_by", $data)) { $this->created_by = $data["created_by"]; }
+        if (array_key_exists("created_on", $data)) { $this->created_on = $data["created_on"]; }
         if (array_key_exists("updated_by", $data)) { $this->updated_by = $data["updated_by"]; }
+        if (array_key_exists("created_by", $data)) { $this->created_by = $data["created_by"]; }
     }
 
     public function clear()
@@ -226,10 +229,10 @@ class CategoryBase
         $this->height = NULL;
         $this->remark = NULL;
         $this->lang = NULL;
-        $this->created_on = NULL;
         $this->updated_on = NULL;
-        $this->created_by = NULL;
+        $this->created_on = NULL;
         $this->updated_by = NULL;
+        $this->created_by = NULL;
     }
 
     public function fetchCreatedBy()
