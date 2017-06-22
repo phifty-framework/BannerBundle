@@ -2,7 +2,7 @@
 namespace BannerBundle\Action;
 use Phifty\FileUtils;
 
-class DeleteCategory extends \ActionKit\RecordAction\DeleteRecordAction
+class DeleteCategory extends \WebAction\RecordAction\DeleteRecordAction
 {
     public $recordClass = 'BannerBundle\\Model\\Category';
 

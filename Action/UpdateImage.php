@@ -2,7 +2,7 @@
 namespace BannerBundle\Action;
 use Phifty\FileUtils;
 
-class UpdateImage extends \ActionKit\RecordAction\UpdateRecordAction
+class UpdateImage extends \WebAction\RecordAction\UpdateRecordAction
 {
     public $recordClass = 'BannerBundle\Model\Image';
 

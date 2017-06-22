@@ -1,6 +1,6 @@
 <?php
 namespace BannerBundle\Action;
-use ActionKit\MixinAction;
+use WebAction\MixinAction;
 
 class ImageMixinAction extends MixinAction
 {

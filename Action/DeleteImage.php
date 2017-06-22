@@ -2,7 +2,7 @@
 namespace BannerBundle\Action;
 use Phifty\FileUtils;
 
-class DeleteImage extends \ActionKit\RecordAction\DeleteRecordAction
+class DeleteImage extends \WebAction\RecordAction\DeleteRecordAction
 {
     public $recordClass = 'BannerBundle\\Model\\Image';
 
