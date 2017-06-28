@@ -1,10 +1,13 @@
 <?php
+
 namespace BannerBundle\Action;
+
 use Phifty\FileUtils;
+use BannerBundle\Model\Image;
 
 class CreateImage extends \WebAction\RecordAction\CreateRecordAction
 {
-    public $recordClass = 'BannerBundle\\Model\\Image';
+    public $recordClass = Image::class;
 
     public function mixins() {
         return [new ImageMixinAction($this)];

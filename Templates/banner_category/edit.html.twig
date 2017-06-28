@@ -1,35 +1,39 @@
-{# 
+{#
 vim:filetype=htmldjango:
 #}
-{% extends '@AppCRUD/edit.html' %}
+{% extends '@CRUD/edit.html.twig' %}
+
+{% set currentFormId = uniqid('editForm') %}
 
 {% block section_body %}
-<form class="ajax-action form-horizontal" enctype="multipart/form-data" method="POST">
-    {{ CRUD.Action.renderSignatureWidget|raw }}
-    {{ CRUD.Action.renderCSRFTokenWidget|raw }}
+<div class="action-result-container"> </div>
+<form id="{{currentFormId}}" class="ajax-action form-horizontal" enctype="multipart/form-data" method="POST">
 
-    {% if CRUD.Record.id %}
-        {{ forms.hidden('id', CRUD.Record.id) }}
+    {{ RecordAction.renderSignatureWidget|raw }}
+    {{ RecordAction.renderCSRFTokenWidget|raw }}
+
+    {% if Record.hasKey() %}
+        {{ RecordAction.renderKeyWidget|raw }}
     {% endif %}
 
-    {{ CRUD.Action.renderField('name') |raw }}
+    {{ RecordAction.renderField('name') |raw }}
 
-    {{ CRUD.Action.renderField('handle') |raw }}
+    {{ RecordAction.renderField('handle') |raw }}
 
-    {% if bundle.config('with_lang') or bundle.config('lang') %}
-      {{CRUD.Action.renderField('lang')|raw}}
+    {% if bundle.config('lang') %}
+      {{RecordAction.renderField('lang')|raw}}
     {% endif %}
 
     <div class="clearfix">
       <div class="col-field">
-        {{ CRUD.Action.renderField('width') |raw }}
+        {{ RecordAction.renderField('width') |raw }}
       </div>
       <div class="col-field">
-        {{ CRUD.Action.renderField('height') |raw }}
+        {{ RecordAction.renderField('height') |raw }}
       </div>
     </div>
 
-    {{ CRUD.Action.renderField('remark') |raw }}
+    {{ RecordAction.renderField('remark') |raw }}
 
 </form>
 {% endblock %}

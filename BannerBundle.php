@@ -7,6 +7,8 @@ use Phifty\Region;
 use Phifty\CRUDHandler;
 use Phifty\Web\RegionPager;
 
+use BannerBundle\Controller\BannerCategoryController;
+
 class BannerBundle extends Bundle
 {
 
@@ -33,8 +35,10 @@ class BannerBundle extends Bundle
     {
         $this->mount('/bs/banner_category' , CategoryCRUDHandler::class);
         $this->mount('/bs/banner_image'    , ImageCRUDHandler::class);
-        $this->addRecordAction('Category');
-        $this->addUpdateOrderingAction('Image');
+        $this->mount('/=/banner-category', BannerCategoryController::class);
+
+        $this->addRecordAction("Category");
+        $this->addUpdateOrderingAction("Image");
 
         $label = $this->config('label') ?: _('Banner');
 

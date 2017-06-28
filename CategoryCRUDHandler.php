@@ -14,4 +14,6 @@ class CategoryCRUDHandler extends CRUDHandler
     public $canEdit    = true;
 
     public $canDelete  = true;
+
+    protected $applyRequestFields = ["handle", "lang", "width", "height"];
 }
