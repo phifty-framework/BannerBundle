@@ -1,42 +1,44 @@
-{# 
-vim:filetype=htmldjango:
-#}
-{% extends '@CRUD/edit.html' %}
+{% extends '@CRUD/edit.html.twig' %}
+
+{% set currentFormId = uniqid('editForm') %}
 
 {% block section_body %}
-<form class="ajax-action form-horizontal" enctype="multipart/form-data" method="POST">
-    {{ CRUD.Action.renderSignatureWidget|raw }}
-    {{ CRUD.Action.renderCSRFTokenWidget|raw }}
-    {% if CRUD.Record.id %}
-      {{ CRUD.Action.renderField('id') |raw }}
+<div class="action-result-container"> </div>
+<form id="{{currentFormId}}" class="ajax-action form-horizontal" enctype="multipart/form-data" method="POST">
+
+    {{ RecordAction.renderSignatureWidget|raw }}
+    {{ RecordAction.renderCSRFTokenWidget|raw }}
+
+    {% if Record.hasKey() %}
+        {{ RecordAction.renderKeyWidget|raw }}
     {% endif %}
 
     <div class="row">
       <div class="col-md-6">
-        {{ CRUD.Action.renderField('image') |raw }}
+        {{ RecordAction.renderField('image') |raw }}
       </div>
       <div class="col-md-6">
       {% if Bundle.config('BannerImage.thumb') %}
-        {{ CRUD.Action.renderField('thumb') |raw }}
+        {{ RecordAction.renderField('thumb') |raw }}
       {% endif %}
       </div>
     </div>
 
     {% if Bundle.config('BannerImage.category') %}
-        {{ CRUD.Action.renderField('category_id') |raw }}
+        {{ RecordAction.renderField('category_id') |raw }}
     {% endif %}
 
     {% if Bundle.config('BannerImage.title') %}
-        {{ CRUD.Action.renderField('title') |raw }}
+        {{ RecordAction.renderField('title') |raw }}
     {% endif %}
     {% if Bundle.config('BannerImage.subtitle') %}
-        {{ CRUD.Action.renderField('subtitle') |raw }}
+        {{ RecordAction.renderField('subtitle') |raw }}
     {% endif %}
 
     {% if Bundle.config('BannerImage.link') %}
-        {{ CRUD.Action.renderField('link') |raw }}
+        {{ RecordAction.renderField('link') |raw }}
     {% endif %}
 
-    {{ CRUD.Action.renderField('comment') |raw }}
+    {{RecordAction.renderField('comment') |raw}}
 </form>
 {% endblock %}

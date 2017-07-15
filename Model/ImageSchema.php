@@ -13,12 +13,24 @@ class ImageSchema extends DeclareSchema
         $this->column('image')
             ->varchar(256)
             ->contentType('ImageFile')
-            ->label( _('大圖') );
+            ->label( _('大圖') )
+            ->buildParam(function($param) {
+                $bundle = \BannerBundle\BannerBundle::getInstance();
+                $uploadDir = ($c = $bundle->config("upload_dir")) ? $c : "upload";
+                $param->putIn($uploadDir)->renderAs('ThumbImageFileInput');
+            })
+            ;
 
         $this->column('thumb')
             ->varchar(256)
             ->contentType('ImageFile')
-            ->label( _('縮圖') );
+            ->label( _('縮圖') )
+            ->buildParam(function($param) {
+                $bundle = \BannerBundle\BannerBundle::getInstance();
+                $uploadDir = ($c = $bundle->config("upload_dir")) ? $c : "upload";
+                $param->putIn($uploadDir)->renderAs('ThumbImageFileInput');
+            })
+            ;
 
         $this->column('title')
             ->varchar(200)
@@ -50,7 +62,7 @@ class ImageSchema extends DeclareSchema
         $this->column('category_id')
             ->integer()
             ->unsigned()
-            ->refer('BannerBundle\\Model\\CategorySchema')
+            ->refer(CategorySchema::class)
             ->renderAs('SelectInput', [ 'allow_empty' => true ])
             ->label(_('橫幅類別'));
 

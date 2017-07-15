@@ -38,6 +38,7 @@ class BannerBundle extends Bundle
         $this->mount('/=/banner-category', BannerCategoryController::class);
 
         $this->addRecordAction("Category");
+        $this->addRecordAction("Image");
         $this->addUpdateOrderingAction("Image");
 
         $label = $this->config('label') ?: _('Banner');
